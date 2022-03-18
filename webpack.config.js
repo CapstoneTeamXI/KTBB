@@ -91,7 +91,7 @@ const config = {
   ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
-    port: 5000,
+    port: 3000,
     inline: true,
     hot: true,
     overlay: true,
