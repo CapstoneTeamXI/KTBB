@@ -21,7 +21,13 @@ export class LoadingScene extends Scene {
     });
 
     this.load.tilemapTiledJSON("dungeon", "tilemaps/json/dungeon.json");
+
+    this.load.spritesheet('tiles_spr', 'tilemaps/tiles/dungeon-16-16.png', {
+      frameWidth: 16,
+      frameHeight: 16,
+    });
   }
+  
 
   create(): void {
     this.scene.start("level-1-scene");
