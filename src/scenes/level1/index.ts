@@ -29,7 +29,8 @@ export class Level1 extends Scene {
       this.tileset,
       this.groundLayer,
       this.wallsLayer,
-      this.physics
+      this.physics,
+      'dungeon'
     );
     this.player = new Player(this, 100, 100);
     this.initCamera();

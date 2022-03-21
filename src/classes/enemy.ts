@@ -88,7 +88,7 @@ export class Enemy extends Actor {
     );
     physics.add.collider(enemies, wallsLayer);
     physics.add.collider(enemies, enemies);
-    physics.add.collider(player, enemies, (obj1, _) => {
+    physics.add.overlap(player, enemies, (obj1, _) => {
       (obj1 as Player).getDamage(1);
     });
   }

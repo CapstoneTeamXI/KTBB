@@ -9,14 +9,15 @@ export class Map {
     tileset: Tilemaps.Tileset,
     groundLayer: Tilemaps.DynamicTilemapLayer,
     wallsLayer: Tilemaps.DynamicTilemapLayer,
-    physics: Scene['physics']
+    physics: Scene['physics'],
+    key: string
   ) {
     map = scene.make.tilemap({
-      key: 'dungeon',
+      key: key,
       tileWidth: 16,
       tileHeight: 16,
     });
-    tileset = map.addTilesetImage('dungeon', 'tiles');
+    tileset = map.addTilesetImage(key, 'tiles');
     groundLayer = map.createDynamicLayer('Ground', tileset, 0, 0);
     wallsLayer = map.createDynamicLayer('Walls', tileset, 0, 0);
     physics.world.setBounds(0, 0, wallsLayer.width, wallsLayer.height);
