@@ -1,5 +1,6 @@
 import { Game, Types } from 'phaser';
-import { Level1, LoadingScene } from './scenes';
+import { Level1, LoadingScene, UIScene } from './scenes';
+
 const gameConfig: Types.Core.GameConfig = {
   title: 'Phaser game tutorial',
   type: Phaser.WEBGL,
@@ -30,7 +31,7 @@ const gameConfig: Types.Core.GameConfig = {
   audio: {
     disableWebAudio: false,
   },
-  scene: [LoadingScene, Level1],
+  scene: [LoadingScene, Level1, UIScene],
 };
 
 window.sizeChanged = () => {
