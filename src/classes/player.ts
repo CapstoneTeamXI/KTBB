@@ -60,7 +60,6 @@ export class Player extends Actor {
       this.getBody().setOffset(15, 15);
       !this.anims.isPlaying && this.anims.play('run', true);
     }
-
     this.hpValue.setPosition(this.x, this.y - this.height * 0.4);
     this.hpValue.setOrigin(0.8, 0.5);
   }

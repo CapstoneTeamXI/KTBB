@@ -1,5 +1,4 @@
 import { Text } from './text';
-
 export enum ScoreOperations {
   INCREASE,
   DECREASE,

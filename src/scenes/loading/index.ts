@@ -5,7 +5,7 @@ export class LoadingScene extends Scene {
   }
 
   preload(): void {
-    this.load.baseURL = 'assets/';
+    // this.load.baseURL = 'assets/';
 
     this.load.image('king', 'sprites/king.png');
 
@@ -27,7 +27,6 @@ export class LoadingScene extends Scene {
       frameHeight: 16,
     });
   }
-
   create(): void {
     this.scene.start('level-1-scene');
     this.scene.start('ui-scene');
