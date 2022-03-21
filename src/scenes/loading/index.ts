@@ -1,4 +1,5 @@
 import { GameObjects, Scene } from 'phaser';
+
 export class LoadingScene extends Scene {
   constructor() {
     super('loading-scene');

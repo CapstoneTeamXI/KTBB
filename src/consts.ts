@@ -8,3 +8,11 @@ export enum GameStatus {
   WIN,
   LOSE,
 }
+
+export enum chestID {
+  normalChest = 595,
+}
+
+export enum enemyID {
+  normalEnemy = 503,
+}
