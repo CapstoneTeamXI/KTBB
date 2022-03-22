@@ -66,7 +66,7 @@ export class Actor extends Physics.Arcade.Sprite {
       this.enemyiFrames = true;
       setTimeout(() => {
         this.enemyiFrames = false;
-      }, 400);
+      }, 350);
     }
   }
 
