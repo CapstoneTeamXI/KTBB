@@ -45,7 +45,6 @@ export class Enemy extends Actor {
       );
     });
   }
-
   preUpdate(): void {
     if (
       Phaser.Math.Distance.BetweenPoints(
