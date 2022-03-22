@@ -1,6 +1,7 @@
 {
-  "name": "phaser-react-demo",
+  "name": "KTBB",
   "version": "0.1.0",
+  "description": "Fullstack Academy 2201 Group XI Sr. Phase Final Project",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
