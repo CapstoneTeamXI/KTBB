@@ -22,6 +22,7 @@ export class Player extends Actor {
       this.anims.play('attack', true);
       this.scene.game.events.emit(EVENTS_NAME.attack);
     });
+
     this.hpValue = new Text(
       this.scene,
       this.x,
@@ -62,6 +63,7 @@ export class Player extends Actor {
     }
     this.hpValue.setPosition(this.x, this.y - this.height * 0.4);
     this.hpValue.setOrigin(0.8, 0.5);
+    this.hpValue.setText(this.hp.toString());
   }
 
   public getDamage(value?: number): void {
