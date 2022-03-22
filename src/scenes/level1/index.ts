@@ -1,13 +1,13 @@
-import { Scene, Tilemaps } from 'phaser';
-import { Player } from '../../classes/player';
-import { Enemy } from '../../classes/enemy';
-import { Chest } from '../../classes/chest';
-import { Map } from '../../classes/map';
-import { chestID, enemyID } from '../../consts';
+import { Scene, Tilemaps } from "phaser";
+import { Player } from "../../classes/player";
+import { Enemy } from "../../classes/enemy";
+import { Chest } from "../../classes/chest";
+import { Map } from "../../classes/map";
+import { chestID, enemyID } from "../../consts";
 
 export class Level1 extends Scene {
   constructor() {
-    super('level-1-scene');
+    super("level-1-scene");
   }
 
   private player!: Player;
@@ -30,7 +30,7 @@ export class Level1 extends Scene {
       this.groundLayer,
       this.wallsLayer,
       this.physics,
-      'dungeon'
+      "dungeon"
     );
     this.player = new Player(this, 100, 100);
     this.initCamera();

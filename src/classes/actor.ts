@@ -1,4 +1,5 @@
-import { Physics } from 'phaser';
+import { Physics } from "phaser";
+
 export class Actor extends Physics.Arcade.Sprite {
   protected hp = 100;
   constructor(
