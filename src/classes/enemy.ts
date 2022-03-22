@@ -1,7 +1,8 @@
-import { Math, Scene } from 'phaser';
+import { Math, Scene, Tilemaps } from 'phaser';
 import { Actor } from './actor';
 import { Player } from './player';
 import { EVENTS_NAME } from '../consts';
+import { gameObjectsToObjectPoints } from '../helpers/gameobject-to-object-point';
 
 export class Enemy extends Actor {
   private target: Player;
@@ -60,5 +61,35 @@ export class Enemy extends Actor {
   }
   public setTarget(target: Player): void {
     this.target = target;
+  }
+
+  static initEnemy(
+    scene: Phaser.Scene,
+    map: Tilemaps.Tilemap,
+    physics: Scene['physics'],
+    player: Player,
+    wallsLayer: Tilemaps.DynamicTilemapLayer,
+    enemyType: number
+  ) {
+    const enemiesPoints = gameObjectsToObjectPoints(
+      map.filterObjects('Enemies', (obj) => obj.name === 'EnemyPoint')
+    );
+    const enemies = enemiesPoints.map((enemyPoint) =>
+      new Enemy(
+        scene,
+        enemyPoint.x,
+        enemyPoint.y,
+        'tiles_spr',
+        player,
+        enemyType
+      )
+        .setName(enemyPoint.id.toString())
+        .setScale(1.5)
+    );
+    physics.add.collider(enemies, wallsLayer);
+    physics.add.collider(enemies, enemies);
+    physics.add.overlap(player, enemies, (obj1, _) => {
+      (obj1 as Player).getDamage(1);
+    });
   }
 }
