@@ -1,4 +1,4 @@
-import { Physics } from 'phaser';
+import { Physics } from "phaser";
 
 export class Actor extends Physics.Arcade.Sprite {
   hp = 10;
@@ -6,8 +6,7 @@ export class Actor extends Physics.Arcade.Sprite {
   requiredXP = 5;
   currentXP = 0;
   attack = 1;
-  enemyXP = 1;
-  enemyHP = 5;
+  levelUpCounter = 0;
   protected iFrames = false;
   protected enemyiFrames = false;
   constructor(
@@ -44,30 +43,6 @@ export class Actor extends Physics.Arcade.Sprite {
       setTimeout(() => {
         this.iFrames = false;
       }, 700);
-    }
-  }
-
-  public getEnemyDamage(value?: number): void {
-    if (this.enemyiFrames === false) {
-      this.scene.tweens.add({
-        targets: this,
-        duration: 100,
-        repeat: 3,
-        yoyo: true,
-        alpha: 0.5,
-        onStart: () => {
-          if (value) {
-            this.enemyHP = this.enemyHP - value;
-          }
-        },
-        onComplete: () => {
-          this.setAlpha(1);
-        },
-      });
-      this.enemyiFrames = true;
-      setTimeout(() => {
-        this.enemyiFrames = false;
-      }, 370);
     }
   }
 
