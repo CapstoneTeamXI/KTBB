@@ -6,12 +6,16 @@ import { Text } from '../../classes/text';
 export class UIScene extends Scene {
   private score!: Score;
   private chestLootHandler: () => void;
+  private enemyKilledHandler: () => void;
   private gameEndPhrase!: Text;
   private gameEndHandler: (status: GameStatus) => void;
 
   constructor() {
     super('ui-scene');
     this.chestLootHandler = () => {
+      this.score.changeValue(ScoreOperations.INCREASE, 10);
+    };
+    this.enemyKilledHandler = () => {
       this.score.changeValue(ScoreOperations.INCREASE, 10);
     };
     this.gameEndHandler = (status) => {
@@ -42,6 +46,7 @@ export class UIScene extends Scene {
 
   private initListeners(): void {
     this.game.events.on(EVENTS_NAME.chestLoot, this.chestLootHandler, this);
+    this.game.events.on(EVENTS_NAME.enemyKilled, this.enemyKilledHandler, this);
     this.game.events.once(EVENTS_NAME.gameEnd, this.gameEndHandler, this);
   }
 
