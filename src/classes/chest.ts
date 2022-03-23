@@ -1,7 +1,7 @@
-import { Scene, Tilemaps } from 'phaser';
-import { Player } from '../classes/player';
-import { gameObjectsToObjectPoints } from '../helpers/gameobject-to-object-point';
-import { EVENTS_NAME } from '../consts';
+import { Scene, Sound, Tilemaps } from "phaser";
+import { Player } from "../classes/player";
+import { gameObjectsToObjectPoints } from "../helpers/gameobject-to-object-point";
+import { EVENTS_NAME } from "../consts";
 
 export class Chest {
   static initChests(
