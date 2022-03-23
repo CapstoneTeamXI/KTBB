@@ -26,7 +26,7 @@ export class Player extends Actor {
         this.soundDelay = true;
         setTimeout(() => {
           this.soundDelay = false;
-        }, 350);
+        }, 370);
       }
       this.scene.game.events.emit(EVENTS_NAME.attack);
     });
@@ -39,7 +39,7 @@ export class Player extends Actor {
     )
       .setFontSize(12)
       .setOrigin(0.8, 0.5);
-    this.getBody().setSize(30, 30);
+    this.getBody().setSize(25, 29);
     this.getBody().setOffset(8, 0);
     this.on('destroy', () => {
       this.keySpace.removeAllListeners();
@@ -56,7 +56,7 @@ export class Player extends Actor {
     if (this.keyA?.isDown) {
       this.body.velocity.x = -110;
       this.checkFlip();
-      this.getBody().setOffset(48, 15);
+      this.getBody().setOffset(45, 15);
       !this.anims.isPlaying && this.anims.play('run', true);
     }
     if (this.keyS?.isDown) {
@@ -66,7 +66,7 @@ export class Player extends Actor {
     if (this.keyD?.isDown) {
       this.body.velocity.x = 110;
       this.checkFlip();
-      this.getBody().setOffset(15, 15);
+      this.getBody().setOffset(18, 15);
       !this.anims.isPlaying && this.anims.play('run', true);
     }
     this.hpValue.setPosition(this.x, this.y - this.height * 0.4);

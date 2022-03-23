@@ -1,4 +1,4 @@
-import { Math, Scene, Tilemaps } from 'phaser';
+import { Scene, Tilemaps } from 'phaser';
 import { Actor } from './actor';
 import { Player } from './player';
 import { EVENTS_NAME } from '../consts';
@@ -7,7 +7,7 @@ import { Text } from './text';
 
 export class Enemy extends Actor {
   private target: Player;
-  private AGRESSOR_RADIUS = 100;
+  private AGRESSOR_RADIUS = 125;
   private hpValue: Text;
   private attackHandler: () => void;
 
@@ -30,24 +30,28 @@ export class Enemy extends Actor {
         Phaser.Math.Distance.BetweenPoints(
           { x: this.x, y: this.y },
           { x: this.target.x, y: this.target.y }
-        ) < this.target.width
+        ) <
+        this.target.width - 25
       ) {
         this.getEnemyDamage(
-          target.getDamageValue(target.attack / 2, target.attack)
+          this.getDamageValue(target.attack / 2, target.attack)
         );
         this.hpValue.setText(this.enemyHP.toString());
         if (this.enemyHP <= 0) {
           this.disableBody(true, false);
-          this.scene.time.delayedCall(300, () => {
+          this.scene.time.delayedCall(0, () => {
+            this.scene.game.events.emit(EVENTS_NAME.enemyKilled);
             this.destroy();
             this.hpValue.destroy();
-            target.currentXP += 1;
+            target.currentXP += target.enemyXP;
             if (target.currentXP >= target.requiredXP) {
+              target.currentXP = 0;
               target.level += 1;
               target.hp += 10;
-              target.currentXP = 0;
               target.requiredXP *= 2;
               target.attack += 5;
+              target.enemyXP = Math.ceil(target.enemyXP * 1.5);
+              this.enemyHP *= 2;
             }
           });
         }
@@ -70,8 +74,8 @@ export class Enemy extends Actor {
     )
       .setFontSize(12)
       .setOrigin(0.8, 0.5);
-    this.getBody().setSize(30, 30);
-    this.getBody().setOffset(8, 0);
+    this.getBody().setSize(16, 16);
+    this.getBody().setOffset(0, 0);
   }
 
   preUpdate(): void {
@@ -87,8 +91,11 @@ export class Enemy extends Actor {
       this.hpValue.setOrigin(0.8, 0.5);
     } else {
       this.getBody().setVelocity(0);
+      this.hpValue.setPosition(this.x, this.y - this.height * 0.4);
+      this.hpValue.setOrigin(0.8, 0.5);
     }
   }
+
   public setTarget(target: Player): void {
     this.target = target;
   }
@@ -99,10 +106,11 @@ export class Enemy extends Actor {
     physics: Scene['physics'],
     player: Player,
     wallsLayer: Tilemaps.DynamicTilemapLayer,
-    enemyType: number
+    enemyType: number,
+    key: string
   ) {
     const enemiesPoints = gameObjectsToObjectPoints(
-      map.filterObjects('Enemies', (obj) => obj.name === 'EnemyPoint')
+      map.filterObjects('Enemies', (obj) => obj.name === key)
     );
     const enemies = enemiesPoints.map((enemyPoint) =>
       new Enemy(

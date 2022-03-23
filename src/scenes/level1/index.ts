@@ -1,13 +1,13 @@
-import { Scene, Tilemaps } from "phaser";
-import { Player } from "../../classes/player";
-import { Enemy } from "../../classes/enemy";
-import { Chest } from "../../classes/chest";
-import { Map } from "../../classes/map";
-import { chestID, enemyID } from "../../consts";
+import { Scene, Tilemaps } from 'phaser';
+import { Player } from '../../classes/player';
+import { Enemy } from '../../classes/enemy';
+import { Chest } from '../../classes/chest';
+import { Map } from '../../classes/map';
+import { chestID, enemyID } from '../../consts';
 
 export class Level1 extends Scene {
   constructor() {
-    super("level-1-scene");
+    super('level-1-scene');
   }
 
   private player!: Player;
@@ -30,9 +30,9 @@ export class Level1 extends Scene {
       this.groundLayer,
       this.wallsLayer,
       this.physics,
-      "dungeon"
+      'dungeon'
     );
-    this.player = new Player(this, 100, 100);
+    this.player = new Player(this, 800, 1600);
     this.initCamera();
 
     Chest.initChests(
@@ -40,7 +40,8 @@ export class Level1 extends Scene {
       updatedMap.map,
       this.physics,
       this.player,
-      chestID.normalChest
+      chestID.normalChest,
+      'ChestPoint'
     );
 
     Enemy.initEnemy(
@@ -49,8 +50,23 @@ export class Level1 extends Scene {
       this.physics,
       this.player,
       updatedMap.wallsLayer,
-      enemyID.normalEnemy
+      enemyID.normalEnemy,
+      'EnemyPoint'
     );
+
+    // setInterval(
+    //   () =>
+    //     Enemy.initEnemy(
+    //       this,
+    //       updatedMap.map,
+    //       this.physics,
+    //       this.player,
+    //       updatedMap.wallsLayer,
+    //       enemyID.normalEnemy,
+    //       'EnemyPoint'
+    //     ),
+    //   30000
+    // );
     this.physics.add.collider(this.player, updatedMap.wallsLayer);
   }
 
