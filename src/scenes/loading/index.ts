@@ -28,7 +28,10 @@ export class LoadingScene extends Scene {
       frameHeight: 16,
     });
 
-    this.load.audio('hammerSwipe', ['audio/fx/hammerSwipe.wav']);
+    this.load.audio("vopna", ["audio/music/Vopna.wav"]);
+    this.load.audio("hammerSwipe", ["audio/fx/hammerSwipe.wav"]);
+    this.load.audio("pickupChest", ["audio/fx/pickupChest.wav"]);
+    // this.load.audio("killEnemy", ["audio/fx/hammerSwipe.wav"]);
   }
 
   create(): void {
