@@ -6,6 +6,7 @@ import { Text } from "../../classes/text";
 export class UIScene extends Scene {
   private score!: Score;
   private chestLootHandler: () => void;
+  private enemyKilledHandler: () => void;
   private gameEndPhrase!: Text;
   private gameEndHandler: (status: GameStatus) => void;
 
@@ -14,6 +15,9 @@ export class UIScene extends Scene {
     this.chestLootHandler = () => {
       this.score.changeValue(ScoreOperations.INCREASE, 10);
       this.sound.play("pickupChest", { volume: 0.1 });
+    };
+    this.enemyKilledHandler = () => {
+      this.score.changeValue(ScoreOperations.INCREASE, 10);
     };
     this.gameEndHandler = (status) => {
       this.cameras.main.setBackgroundColor("rgba(0,0,0,0.6)");
@@ -43,6 +47,7 @@ export class UIScene extends Scene {
 
   private initListeners(): void {
     this.game.events.on(EVENTS_NAME.chestLoot, this.chestLootHandler, this);
+    this.game.events.on(EVENTS_NAME.enemyKilled, this.enemyKilledHandler, this);
     this.game.events.once(EVENTS_NAME.gameEnd, this.gameEndHandler, this);
   }
 
