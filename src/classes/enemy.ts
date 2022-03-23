@@ -50,8 +50,6 @@ export class Enemy extends Actor {
               target.hp += 10;
               target.requiredXP *= 2;
               target.attack += 5;
-              target.enemyXP = Math.ceil(target.enemyXP * 1.5);
-              this.enemyHP *= 2;
             }
           });
         }
