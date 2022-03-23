@@ -52,6 +52,16 @@ export class Level1 extends Scene {
       enemyID.normalEnemy
     );
     this.physics.add.collider(this.player, updatedMap.wallsLayer);
+
+    this.sound.play("vopna", {
+      mute: false,
+      volume: 0.1,
+      rate: 1,
+      detune: 0,
+      seek: 0,
+      loop: true,
+      delay: 0,
+    });
   }
 
   update(): void {

@@ -20,7 +20,7 @@ export class Player extends Actor {
     this.keySpace = this.scene.input.keyboard.addKey(32);
     this.keySpace.on("down", (event: KeyboardEvent) => {
       this.anims.play("attack", true);
-      this.scene.sound.play("hammerSwipe");
+      this.scene.sound.play("hammerSwipe", { volume: 0.1 });
       this.scene.game.events.emit(EVENTS_NAME.attack);
     });
     this.hpValue = new Text(
