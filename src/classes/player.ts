@@ -1,7 +1,7 @@
-import { Input, Scene } from 'phaser';
-import { Actor } from './actor';
-import { Text } from './text';
-import { EVENTS_NAME, GameStatus } from '../consts';
+import { Input } from "phaser";
+import { Actor } from "./actor";
+import { Text } from "./text";
+import { EVENTS_NAME, GameStatus } from "../consts";
 
 export class Player extends Actor {
   private keyW: Phaser.Input.Keyboard.Key;
@@ -13,13 +13,12 @@ export class Player extends Actor {
   private soundDelay = false;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
-    super(scene, x, y, 'king');
-    this.keyW = this.scene.input.keyboard.addKey('W');
-    this.keyA = this.scene.input.keyboard.addKey('A');
-    this.keyS = this.scene.input.keyboard.addKey('S');
-    this.keyD = this.scene.input.keyboard.addKey('D');
+    super(scene, x, y, "king");
+    this.keyW = this.scene.input.keyboard.addKey("W");
+    this.keyA = this.scene.input.keyboard.addKey("A");
+    this.keyS = this.scene.input.keyboard.addKey("S");
+    this.keyD = this.scene.input.keyboard.addKey("D");
     this.keySpace = this.scene.input.keyboard.addKey(32);
-
     this.keySpace.on('down', (event: KeyboardEvent) => {
       this.anims.play('attack', true);
       if (this.soundDelay === false) {
@@ -42,7 +41,7 @@ export class Player extends Actor {
       .setOrigin(0.8, 0.5);
     this.getBody().setSize(25, 29);
     this.getBody().setOffset(8, 0);
-    this.on('destroy', () => {
+    this.on("destroy", () => {
       this.keySpace.removeAllListeners();
     });
     this.initAnimations();
@@ -52,27 +51,39 @@ export class Player extends Actor {
     this.getBody().setVelocity(0);
     if (this.keyW?.isDown) {
       this.body.velocity.y = -110;
-      !this.anims.isPlaying && this.anims.play('run', true);
+      !this.anims.isPlaying && this.anims.play("run", true);
     }
     if (this.keyA?.isDown) {
       this.body.velocity.x = -110;
       this.checkFlip();
       this.getBody().setOffset(45, 15);
-      !this.anims.isPlaying && this.anims.play('run', true);
+      !this.anims.isPlaying && this.anims.play("run", true);
     }
     if (this.keyS?.isDown) {
       this.body.velocity.y = 110;
-      !this.anims.isPlaying && this.anims.play('run', true);
+      !this.anims.isPlaying && this.anims.play("run", true);
     }
     if (this.keyD?.isDown) {
       this.body.velocity.x = 110;
       this.checkFlip();
       this.getBody().setOffset(18, 15);
-      !this.anims.isPlaying && this.anims.play('run', true);
+      !this.anims.isPlaying && this.anims.play("run", true);
     }
     this.hpValue.setPosition(this.x, this.y - this.height * 0.4);
     this.hpValue.setOrigin(0.8, 0.5);
     this.hpValue.setText(this.hp.toString());
+    if (this.currentXP >= this.requiredXP) {
+      this.levelUp();
+    }
+  }
+
+  private levelUp(): void {
+    this.currentXP = 0;
+    this.level += 1;
+    this.hp += 10;
+    this.requiredXP *= 2;
+    this.attack += 5;
+    this.levelUpCounter = 1;
   }
 
   public getDamage(value?: number): void {
@@ -85,17 +96,17 @@ export class Player extends Actor {
 
   private initAnimations(): void {
     this.scene.anims.create({
-      key: 'run',
-      frames: this.scene.anims.generateFrameNames('a-king', {
-        prefix: 'run-',
+      key: "run",
+      frames: this.scene.anims.generateFrameNames("a-king", {
+        prefix: "run-",
         end: 7,
       }),
       frameRate: 8,
     });
     this.scene.anims.create({
-      key: 'attack',
-      frames: this.scene.anims.generateFrameNames('a-king', {
-        prefix: 'attack-',
+      key: "attack",
+      frames: this.scene.anims.generateFrameNames("a-king", {
+        prefix: "attack-",
         end: 2,
       }),
       frameRate: 8,
