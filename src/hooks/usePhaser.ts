@@ -29,12 +29,12 @@ export default function usePhaser(config: Types.Core.GameConfig) {
               `display: block; width: ${window.innerWidth}px; height: ${window.innerHeight}px;`
             );
 
-            console.log('window resize inside setTimeout');
+            // console.log('window resize inside setTimeout');
           }, 100);
         }
       };
       window.onresize = () => window.sizeChanged();
-      console.log('window resize');
+      // console.log('window resize');
       // END CHECK WINDOW RESIZE
     }
   }, [config]);
