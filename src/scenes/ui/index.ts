@@ -12,6 +12,7 @@ export class UIScene extends Scene {
   private gameEndPhrase!: Text;
   private gameEndHandler: (status: GameStatus) => void;
   private alive = true;
+  private interval: NodeJS.Timer;
 
   constructor() {
     super('ui-scene');
@@ -40,12 +41,16 @@ export class UIScene extends Scene {
         this.game.scale.width / 2 - this.gameEndPhrase.width / 2,
         this.game.scale.height * 0.4
       );
+      this.alive = false;
       this.input.on('pointerdown', () => {
         this.game.events.off(EVENTS_NAME.chestLoot, this.chestLootHandler);
         this.game.events.off(EVENTS_NAME.gameEnd, this.gameEndHandler);
         this.scene.get('level-1-scene').scene.restart();
         this.scene.restart();
         this.alive = true;
+        if (this.interval) {
+          clearInterval(this.interval);
+        }
       });
     };
   }
@@ -54,7 +59,11 @@ export class UIScene extends Scene {
     this.game.events.on(EVENTS_NAME.chestLoot, this.chestLootHandler, this);
     this.game.events.on(EVENTS_NAME.enemyKilled, this.enemyKilledHandler, this);
     this.game.events.once(EVENTS_NAME.gameEnd, this.gameEndHandler, this);
-    setInterval(() => {
+
+    // if (this.interval) {
+    //   clearInterval(this.interval);
+    // }
+    this.interval = setInterval(() => {
       if (this.alive === true) {
         this.timer.gameTimer();
       }
