@@ -6,7 +6,6 @@ export class Actor extends Physics.Arcade.Sprite {
   requiredXP = 5;
   currentXP = 0;
   attack = 1;
-  levelUpCounter = 0;
   protected iFrames = false;
   protected enemyiFrames = false;
   constructor(

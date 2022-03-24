@@ -117,18 +117,6 @@
                 }, 
                 {
                  "height":0,
-                 "id":8,
-                 "name":"ChestPoint",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1020,
-                 "y":1502.67
-                }, 
-                {
-                 "height":0,
                  "id":9,
                  "name":"ChestPoint",
                  "point":true,
@@ -871,18 +859,6 @@
          "objects":[
                 {
                  "height":0,
-                 "id":81,
-                 "name":"RespawnPoint",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1086.5,
-                 "y":1474.5
-                }, 
-                {
-                 "height":0,
                  "id":82,
                  "name":"RespawnPoint",
                  "point":true,
@@ -955,18 +931,6 @@
                 }, 
                 {
                  "height":0,
-                 "id":89,
-                 "name":"RespawnPoint",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1339.5,
-                 "y":1246.5
-                }, 
-                {
-                 "height":0,
                  "id":90,
                  "name":"RespawnPoint",
                  "point":true,
@@ -979,18 +943,6 @@
                 }, 
                 {
                  "height":0,
-                 "id":91,
-                 "name":"RespawnPoint",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1479,
-                 "y":1270
-                }, 
-                {
-                 "height":0,
                  "id":92,
                  "name":"RespawnPoint",
                  "point":true,
@@ -1000,18 +952,6 @@
                  "width":0,
                  "x":1491,
                  "y":1312
-                }, 
-                {
-                 "height":0,
-                 "id":93,
-                 "name":"RespawnPoint",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1226.5,
-                 "y":1028.5
                 }, 
                 {
                  "height":0,
@@ -1111,18 +1051,6 @@
                 }, 
                 {
                  "height":0,
-                 "id":102,
-                 "name":"RespawnPoint",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1259.5,
-                 "y":826.5
-                }, 
-                {
-                 "height":0,
                  "id":103,
                  "name":"RespawnPoint",
                  "point":true,
@@ -1132,18 +1060,6 @@
                  "width":0,
                  "x":1327,
                  "y":834.5
-                }, 
-                {
-                 "height":0,
-                 "id":104,
-                 "name":"RespawnPoint",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1347,
-                 "y":762.5
                 }, 
                 {
                  "height":0,
@@ -1255,18 +1171,6 @@
                 }, 
                 {
                  "height":0,
-                 "id":114,
-                 "name":"RespawnPoint",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":818.5,
-                 "y":744.5
-                }, 
-                {
-                 "height":0,
                  "id":115,
                  "name":"RespawnPoint",
                  "point":true,
@@ -1279,18 +1183,6 @@
                 }, 
                 {
                  "height":0,
-                 "id":116,
-                 "name":"RespawnPoint",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":311,
-                 "y":812.5
-                }, 
-                {
-                 "height":0,
                  "id":117,
                  "name":"RespawnPoint",
                  "point":true,
@@ -1300,18 +1192,6 @@
                  "width":0,
                  "x":361.5,
                  "y":862
-                }, 
-                {
-                 "height":0,
-                 "id":118,
-                 "name":"RespawnPoint",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":442,
-                 "y":852.5
                 }, 
                 {
                  "height":0,
@@ -1351,18 +1231,6 @@
                 }, 
                 {
                  "height":0,
-                 "id":122,
-                 "name":"RespawnPoint",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":183,
-                 "y":1032.5
-                }, 
-                {
-                 "height":0,
                  "id":123,
                  "name":"RespawnPoint",
                  "point":true,
@@ -1372,18 +1240,6 @@
                  "width":0,
                  "x":224.5,
                  "y":992
-                }, 
-                {
-                 "height":0,
-                 "id":124,
-                 "name":"RespawnPoint",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":135,
-                 "y":1485.5
                 }, 
                 {
                  "height":0,
@@ -1423,18 +1279,6 @@
                 }, 
                 {
                  "height":0,
-                 "id":128,
-                 "name":"RespawnPoint",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":547.5,
-                 "y":1400.5
-                }, 
-                {
-                 "height":0,
                  "id":129,
                  "name":"RespawnPoint",
                  "point":true,
@@ -1454,8 +1298,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":612,
-                 "y":1481.5
+                 "x":614.666666666667,
+                 "y":1446.83333333333
                 }, 
                 {
                  "height":0,
@@ -1480,18 +1324,6 @@
                  "width":0,
                  "x":641,
                  "y":1199
-                }, 
-                {
-                 "height":0,
-                 "id":133,
-                 "name":"RespawnPoint",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":710.5,
-                 "y":1172
                 }, 
                 {
                  "height":0,

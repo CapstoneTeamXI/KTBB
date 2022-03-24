@@ -33,7 +33,7 @@ export class Level1 extends Scene {
       this.physics,
       "dungeon"
     );
-    this.player = new Player(this, 800, 1600);
+    this.player = new Player(this, 800, 1550);
     this.initCamera();
 
     Chest.initChests(
