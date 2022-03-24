@@ -75,7 +75,7 @@ export class Player extends Actor {
     if (this.dashCooldown === false) {
       if (this.keyShift?.isDown && this.keyW?.isDown) {
         this.iFrames = true;
-        this.body.velocity.y = -960;
+        this.body.velocity.y = -899;
         setTimeout(() => {
           this.dashCooldown = true;
         }, 70);
@@ -88,7 +88,7 @@ export class Player extends Actor {
       }
       if (this.keyShift?.isDown && this.keyA?.isDown) {
         this.iFrames = true;
-        this.body.velocity.x = -960;
+        this.body.velocity.x = -899;
         setTimeout(() => {
           this.dashCooldown = true;
         }, 70);
@@ -101,7 +101,7 @@ export class Player extends Actor {
       }
       if (this.keyShift?.isDown && this.keyS?.isDown) {
         this.iFrames = true;
-        this.body.velocity.y = 960;
+        this.body.velocity.y = 899;
         setTimeout(() => {
           this.dashCooldown = true;
         }, 70);
@@ -114,7 +114,7 @@ export class Player extends Actor {
       }
       if (this.keyShift?.isDown && this.keyD?.isDown) {
         this.iFrames = true;
-        this.body.velocity.x = 960;
+        this.body.velocity.x = 899;
         setTimeout(() => {
           this.dashCooldown = true;
         }, 70);
