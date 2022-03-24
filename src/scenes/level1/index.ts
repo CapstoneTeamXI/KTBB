@@ -1,13 +1,13 @@
-import { Scene, Tilemaps } from 'phaser';
-import { Player } from '../../classes/player';
-import { Enemy } from '../../classes/enemy';
-import { Chest } from '../../classes/chest';
-import { Map } from '../../classes/map';
-import { chestID, enemyID } from '../../consts';
+import { Scene, Tilemaps } from "phaser";
+import { Player } from "../../classes/player";
+import { Enemy } from "../../classes/enemy";
+import { Chest } from "../../classes/chest";
+import { Map } from "../../classes/map";
+import { chestID, enemyID } from "../../consts";
 
 export class Level1 extends Scene {
   constructor() {
-    super('level-1-scene');
+    super("level-1-scene");
   }
 
   private player!: Player;
@@ -15,6 +15,7 @@ export class Level1 extends Scene {
   private tileset!: Tilemaps.Tileset;
   private wallsLayer!: Tilemaps.DynamicTilemapLayer;
   private groundLayer!: Tilemaps.DynamicTilemapLayer;
+  private enemy!: Enemy[];
 
   private initCamera(): void {
     this.cameras.main.setSize(this.game.scale.width, this.game.scale.height);
@@ -30,44 +31,83 @@ export class Level1 extends Scene {
       this.groundLayer,
       this.wallsLayer,
       this.physics,
-      'dungeon'
+      "dungeon"
     );
-    this.player = new Player(this, 800, 1600);
+
+    this.map = updatedMap.map;
+    this.wallsLayer = updatedMap.wallsLayer;
+    this.player = new Player(this, 800, 1550);
     this.initCamera();
 
     Chest.initChests(
       this,
-      updatedMap.map,
+      this.map,
       this.physics,
       this.player,
       chestID.normalChest,
-      'ChestPoint'
+      "ChestPoint"
     );
 
     Enemy.initEnemy(
       this,
-      updatedMap.map,
+      this.map,
       this.physics,
       this.player,
-      updatedMap.wallsLayer,
-      enemyID.normalEnemy,
-      'EnemyPoint'
+      this.wallsLayer,
+      enemyID.level1Orc,
+      "Enemies",
+      "EnemyPoint"
     );
 
-    // setInterval(
-    //   () =>
-    //     Enemy.initEnemy(
-    //       this,
-    //       updatedMap.map,
-    //       this.physics,
-    //       this.player,
-    //       updatedMap.wallsLayer,
-    //       enemyID.normalEnemy,
-    //       'EnemyPoint'
-    //     ),
-    //   30000
-    // );
-    this.physics.add.collider(this.player, updatedMap.wallsLayer);
+    setInterval(() => {
+      if (this.player.level === 2) {
+        Enemy.initEnemy(
+          this,
+          this.map,
+          this.physics,
+          this.player,
+          this.wallsLayer,
+          enemyID.level2Orc,
+          "Respawn",
+          "RespawnPoint"
+        );
+      }
+      if (this.player.level === 3) {
+        Enemy.initEnemy(
+          this,
+          this.map,
+          this.physics,
+          this.player,
+          this.wallsLayer,
+          enemyID.level3Orc,
+          "Respawn",
+          "RespawnPoint"
+        );
+      }
+      if (this.player.level >= 4) {
+        Enemy.initEnemy(
+          this,
+          this.map,
+          this.physics,
+          this.player,
+          this.wallsLayer,
+          enemyID.level4Orc,
+          "Respawn",
+          "RespawnPoint"
+        );
+      }
+    }, 60000);
+    this.physics.add.collider(this.player, this.wallsLayer);
+
+    this.sound.play("vopna", {
+      mute: false,
+      volume: 0.1,
+      rate: 1,
+      detune: 0,
+      seek: 0,
+      loop: true,
+      delay: 0,
+    });
   }
 
   update(): void {

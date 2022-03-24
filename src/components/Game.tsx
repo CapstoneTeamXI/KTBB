@@ -57,7 +57,7 @@ export default function Game() {
       <div className={styles.gameContainer} ref={gameContainer}>
         <header>
           <h1>Kill The Big Bad</h1>
-          <div className={styles.score}>{score}</div>
+          {/* <div className={styles.score}>{score}</div> */}
         </header>
         <footer>
           <button
