@@ -45,9 +45,9 @@ export class Enemy extends Actor {
           this.disableBody(true, false);
           this.scene.time.delayedCall(0, () => {
             this.scene.game.events.emit(EVENTS_NAME.enemyKilled);
-            this.destroy();
-            this.hpValue.destroy();
             this.target.currentXP += this.enemyXP;
+            this.hpValue.destroy();
+            this.destroy();
           });
         }
       }
@@ -146,6 +146,7 @@ export class Enemy extends Actor {
         .setScale(1.5)
     );
     physics.add.collider(enemies, wallsLayer);
+    physics.add.collider(enemies, enemies);
     physics.add.overlap(player, enemies, (obj1, _) => {
       (obj1 as Player).getDamage(player.level);
     });

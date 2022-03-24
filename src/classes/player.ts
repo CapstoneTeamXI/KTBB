@@ -23,10 +23,10 @@ export class Player extends Actor {
     this.keyShift = this.scene.input.keyboard.addKey("Shift");
     this.keySpace = this.scene.input.keyboard.addKey(32);
     this.keySpace.on("down", (event: KeyboardEvent) => {
-      this.anims.play("attack", true);
       if (this.soundDelay === false) {
-        this.scene.sound.play("hammerSwipe", { volume: 0.1 });
         this.soundDelay = true;
+        this.anims.play("attack", true);
+        this.scene.sound.play("hammerSwipe", { volume: 0.1 });
         setTimeout(() => {
           this.soundDelay = false;
         }, 370);

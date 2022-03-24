@@ -33,12 +33,15 @@ export class Level1 extends Scene {
       this.physics,
       "dungeon"
     );
+
+    this.map = updatedMap.map;
+    this.wallsLayer = updatedMap.wallsLayer;
     this.player = new Player(this, 800, 1550);
     this.initCamera();
 
     Chest.initChests(
       this,
-      updatedMap.map,
+      this.map,
       this.physics,
       this.player,
       chestID.normalChest,
@@ -47,10 +50,10 @@ export class Level1 extends Scene {
 
     Enemy.initEnemy(
       this,
-      updatedMap.map,
+      this.map,
       this.physics,
       this.player,
-      updatedMap.wallsLayer,
+      this.wallsLayer,
       enemyID.level1Orc,
       "Enemies",
       "EnemyPoint"
@@ -60,10 +63,10 @@ export class Level1 extends Scene {
       if (this.player.level === 2) {
         Enemy.initEnemy(
           this,
-          updatedMap.map,
+          this.map,
           this.physics,
           this.player,
-          updatedMap.wallsLayer,
+          this.wallsLayer,
           enemyID.level2Orc,
           "Respawn",
           "RespawnPoint"
@@ -72,10 +75,10 @@ export class Level1 extends Scene {
       if (this.player.level === 3) {
         Enemy.initEnemy(
           this,
-          updatedMap.map,
+          this.map,
           this.physics,
           this.player,
-          updatedMap.wallsLayer,
+          this.wallsLayer,
           enemyID.level3Orc,
           "Respawn",
           "RespawnPoint"
@@ -84,17 +87,17 @@ export class Level1 extends Scene {
       if (this.player.level >= 4) {
         Enemy.initEnemy(
           this,
-          updatedMap.map,
+          this.map,
           this.physics,
           this.player,
-          updatedMap.wallsLayer,
+          this.wallsLayer,
           enemyID.level4Orc,
           "Respawn",
           "RespawnPoint"
         );
       }
     }, 60000);
-    this.physics.add.collider(this.player, updatedMap.wallsLayer);
+    this.physics.add.collider(this.player, this.wallsLayer);
 
     this.sound.play("vopna", {
       mute: false,
