@@ -1,0 +1,151 @@
+{
+  "frames": [
+    {
+      "filename": "attack-0",
+      "frame": {
+        "w": 48,
+        "h": 42,
+        "x": 0,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "attack-1",
+      "frame": {
+        "w": 48,
+        "h": 42,
+        "x": 0,
+        "y": 42
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "attack-2",
+      "frame": {
+        "w": 48,
+        "h": 42,
+        "x": 48,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "idle-0",
+      "frame": {
+        "w": 48,
+        "h": 42,
+        "x": 48,
+        "y": 42
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "idle-1",
+      "frame": {
+        "w": 48,
+        "h": 42,
+        "x": 0,
+        "y": 84
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "idle-2",
+      "frame": {
+        "w": 48,
+        "h": 42,
+        "x": 48,
+        "y": 84
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "idle-3",
+      "frame": {
+        "w": 48,
+        "h": 42,
+        "x": 96,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "run-0",
+      "frame": {
+        "w": 48,
+        "h": 42,
+        "x": 96,
+        "y": 42
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "run-1",
+      "frame": {
+        "w": 48,
+        "h": 42,
+        "x": 96,
+        "y": 84
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "run-2",
+      "frame": {
+        "w": 48,
+        "h": 42,
+        "x": 0,
+        "y": 126
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "run-3",
+      "frame": {
+        "w": 48,
+        "h": 42,
+        "x": 48,
+        "y": 126
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  ],
+  "meta": {
+    "description": "Atlas generado con Atlas Packer Gamma V2",
+    "web": "https://gammafp.github.io/atlas-packer-phaser/"
+  }
+}

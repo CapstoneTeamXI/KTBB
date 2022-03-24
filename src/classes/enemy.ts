@@ -25,8 +25,8 @@ export class Enemy extends Actor {
     this.target = target;
     scene.add.existing(this);
     scene.physics.add.existing(this);
-    this.getBody().setSize(16, 16);
-    this.getBody().setOffset(0, 0);
+    this.getBody().setSize(12, 16);
+    this.getBody().setOffset(3, 0);
     this.enemyXP = this.target.level;
     this.enemyHP = this.target.requiredXP;
     this.attackHandler = () => {
@@ -35,7 +35,7 @@ export class Enemy extends Actor {
           { x: this.x, y: this.y },
           { x: this.target.x, y: this.target.y }
         ) <
-        this.target.width - 25
+        this.target.width - 5
       ) {
         this.getEnemyDamage(
           this.getDamageValue(target.attack / 2, target.attack)
@@ -45,9 +45,9 @@ export class Enemy extends Actor {
           this.disableBody(true, false);
           this.scene.time.delayedCall(0, () => {
             this.scene.game.events.emit(EVENTS_NAME.enemyKilled);
-            this.destroy();
-            this.hpValue.destroy();
             this.target.currentXP += this.enemyXP;
+            this.hpValue.destroy();
+            this.destroy();
           });
         }
       }
@@ -69,8 +69,6 @@ export class Enemy extends Actor {
     )
       .setFontSize(12)
       .setOrigin(0.8, 0.5);
-    this.getBody().setSize(16, 16);
-    this.getBody().setOffset(0, 0);
   }
 
   preUpdate(): void {
