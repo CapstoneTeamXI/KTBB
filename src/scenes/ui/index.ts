@@ -60,9 +60,6 @@ export class UIScene extends Scene {
     this.game.events.on(EVENTS_NAME.enemyKilled, this.enemyKilledHandler, this);
     this.game.events.once(EVENTS_NAME.gameEnd, this.gameEndHandler, this);
 
-    // if (this.interval) {
-    //   clearInterval(this.interval);
-    // }
     this.interval = setInterval(() => {
       if (this.alive === true) {
         this.timer.gameTimer();
