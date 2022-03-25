@@ -5,15 +5,25 @@ import { Text } from "../../classes/text";
 
 export class UIScene extends Scene {
   private score!: Score;
-  private chestLootHandler: () => void;
+  private keyChestHandler: () => void;
+  private coinChestHandler: () => void;
+  private monsterChestHandler: () => void;
   private enemyKilledHandler: () => void;
   private gameEndPhrase!: Text;
   private gameEndHandler: (status: GameStatus) => void;
 
   constructor() {
     super("ui-scene");
-    this.chestLootHandler = () => {
+    this.keyChestHandler = () => {
       this.score.changeValue(ScoreOperations.INCREASE, 10);
+      this.sound.play("pickupChest", { volume: 0.1 });
+    };
+    this.coinChestHandler = () => {
+      this.score.changeValue(ScoreOperations.INCREASE, 50);
+      this.sound.play("pickupChest", { volume: 0.1 });
+    };
+    this.monsterChestHandler = () => {
+      this.score.changeValue(ScoreOperations.INCREASE, 100);
       this.sound.play("pickupChest", { volume: 0.1 });
     };
     this.enemyKilledHandler = () => {
@@ -37,7 +47,13 @@ export class UIScene extends Scene {
         this.game.scale.height * 0.4
       );
       this.input.on("pointerdown", () => {
-        this.game.events.off(EVENTS_NAME.chestLoot, this.chestLootHandler);
+        this.game.events.off(EVENTS_NAME.keyChest, this.keyChestHandler);
+        this.game.events.off(EVENTS_NAME.coinChest, this.coinChestHandler);
+        this.game.events.off(
+          EVENTS_NAME.monsterChest,
+          this.monsterChestHandler
+        );
+
         this.game.events.off(EVENTS_NAME.gameEnd, this.gameEndHandler);
         this.scene.get("level-1-scene").scene.restart();
         this.scene.restart();
@@ -46,7 +62,13 @@ export class UIScene extends Scene {
   }
 
   private initListeners(): void {
-    this.game.events.on(EVENTS_NAME.chestLoot, this.chestLootHandler, this);
+    this.game.events.on(EVENTS_NAME.keyChest, this.keyChestHandler, this);
+    this.game.events.on(EVENTS_NAME.coinChest, this.coinChestHandler, this);
+    this.game.events.on(
+      EVENTS_NAME.monsterChest,
+      this.monsterChestHandler,
+      this
+    );
     this.game.events.on(EVENTS_NAME.enemyKilled, this.enemyKilledHandler, this);
     this.game.events.once(EVENTS_NAME.gameEnd, this.gameEndHandler, this);
   }
