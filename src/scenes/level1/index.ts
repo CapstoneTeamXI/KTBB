@@ -42,7 +42,9 @@ export class Level1 extends Scene {
     this.initCamera();
 
     const closedDoor = new Actor(this, 800, 384, "closedDoor");
+    closedDoor.setImmovable();
     this.physics.add.collider(this.player, closedDoor);
+    this.physics.add.collider(closedDoor, this.wallsLayer);
 
     Chest.initChests(
       this,
