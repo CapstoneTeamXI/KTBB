@@ -69,7 +69,7 @@ export class UIScene extends Scene {
 
   create(): void {
     this.score = new Score(this, 20, 20, 0);
-    this.timer = new Timer(this, 20, 600);
+    this.timer = new Timer(this, this.game.scale.width * 0.4, 20);
     this.initListeners();
   }
 }
