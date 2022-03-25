@@ -5,6 +5,11 @@ interface Window {
   game: Phaser.Game;
 }
 
+interface PhaserEvent {
+  action: string;
+  payload?: any;
+}
+
 type ObjectPoint = {
   height: number;
   id: number;
