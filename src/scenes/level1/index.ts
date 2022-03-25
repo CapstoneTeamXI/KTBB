@@ -15,7 +15,7 @@ export class Level1 extends Scene {
   private tileset!: Tilemaps.Tileset;
   private wallsLayer!: Tilemaps.DynamicTilemapLayer;
   private groundLayer!: Tilemaps.DynamicTilemapLayer;
-  private enemy!: Enemy[];
+  private onMap = true;
 
   private initCamera(): void {
     this.cameras.main.setSize(this.game.scale.width, this.game.scale.height);
@@ -60,41 +60,43 @@ export class Level1 extends Scene {
     );
 
     setInterval(() => {
-      if (this.player.level === 2) {
-        Enemy.initEnemy(
-          this,
-          this.map,
-          this.physics,
-          this.player,
-          this.wallsLayer,
-          enemyID.level2Orc,
-          "Respawn",
-          "RespawnPoint"
-        );
-      }
-      if (this.player.level === 3) {
-        Enemy.initEnemy(
-          this,
-          this.map,
-          this.physics,
-          this.player,
-          this.wallsLayer,
-          enemyID.level3Orc,
-          "Respawn",
-          "RespawnPoint"
-        );
-      }
-      if (this.player.level >= 4) {
-        Enemy.initEnemy(
-          this,
-          this.map,
-          this.physics,
-          this.player,
-          this.wallsLayer,
-          enemyID.level4Orc,
-          "Respawn",
-          "RespawnPoint"
-        );
+      if (this.onMap === true) {
+        if (this.player.level === 2) {
+          Enemy.initEnemy(
+            this,
+            this.map,
+            this.physics,
+            this.player,
+            this.wallsLayer,
+            enemyID.level2Orc,
+            "Respawn",
+            "RespawnPoint"
+          );
+        }
+        if (this.player.level === 3) {
+          Enemy.initEnemy(
+            this,
+            this.map,
+            this.physics,
+            this.player,
+            this.wallsLayer,
+            enemyID.level3Orc,
+            "Respawn",
+            "RespawnPoint"
+          );
+        }
+        if (this.player.level >= 4) {
+          Enemy.initEnemy(
+            this,
+            this.map,
+            this.physics,
+            this.player,
+            this.wallsLayer,
+            enemyID.level4Orc,
+            "Respawn",
+            "RespawnPoint"
+          );
+        }
       }
     }, 60000);
     this.physics.add.collider(this.player, this.wallsLayer);
@@ -108,6 +110,21 @@ export class Level1 extends Scene {
       loop: true,
       delay: 0,
     });
+
+    this.input.on(
+      "pointerdown",
+      () => {
+        this.onMap = false;
+        this.scene.start("level-1-boss-scene");
+        localStorage.setItem("playerLevel", JSON.stringify(this.player.level));
+        localStorage.setItem("playerHP", JSON.stringify(this.player.hp));
+        localStorage.setItem(
+          "playerAttack",
+          JSON.stringify(this.player.attack)
+        );
+      },
+      this
+    );
   }
 
   update(): void {
