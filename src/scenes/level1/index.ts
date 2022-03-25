@@ -4,6 +4,7 @@ import { Enemy } from "../../classes/enemy";
 import { Chest } from "../../classes/chest";
 import { Map } from "../../classes/map";
 import { chestID, enemyID } from "../../consts";
+import { Actor } from "../../classes/actor";
 
 export class Level1 extends Scene {
   constructor() {
@@ -16,6 +17,7 @@ export class Level1 extends Scene {
   private wallsLayer!: Tilemaps.DynamicTilemapLayer;
   private groundLayer!: Tilemaps.DynamicTilemapLayer;
   private onMap = true;
+  private enableBossRoom = false;
 
   private initCamera(): void {
     this.cameras.main.setSize(this.game.scale.width, this.game.scale.height);
@@ -38,6 +40,9 @@ export class Level1 extends Scene {
     this.wallsLayer = updatedMap.wallsLayer;
     this.player = new Player(this, 800, 1550);
     this.initCamera();
+
+    const closedDoor = new Actor(this, 800, 384, "closedDoor");
+    this.physics.add.collider(this.player, closedDoor);
 
     Chest.initChests(
       this,
@@ -111,20 +116,30 @@ export class Level1 extends Scene {
       delay: 0,
     });
 
-    this.input.on(
-      "pointerdown",
-      () => {
-        this.onMap = false;
-        this.scene.start("level-1-boss-scene");
-        localStorage.setItem("playerLevel", JSON.stringify(this.player.level));
-        localStorage.setItem("playerHP", JSON.stringify(this.player.hp));
-        localStorage.setItem(
-          "playerAttack",
-          JSON.stringify(this.player.attack)
-        );
-      },
-      this
-    );
+    setInterval(() => {
+      if (this.onMap === true) {
+        if (this.player.level >= 2) {
+          this.enableBossRoom = true;
+        }
+        if (this.enableBossRoom === true) {
+          let openDoor = new Actor(this, 800, 384, "openDoor");
+          closedDoor.destroy();
+          this.physics.add.overlap(this.player, openDoor, () => {
+            this.onMap = false;
+            this.scene.start("level-1-boss-scene");
+            localStorage.setItem(
+              "playerLevel",
+              JSON.stringify(this.player.level)
+            );
+            localStorage.setItem("playerHP", JSON.stringify(this.player.hp));
+            localStorage.setItem(
+              "playerAttack",
+              JSON.stringify(this.player.attack)
+            );
+          });
+        }
+      }
+    }, 5000);
   }
 
   update(): void {

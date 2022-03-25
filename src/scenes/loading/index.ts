@@ -7,6 +7,8 @@ export class LoadingScene extends Scene {
 
   preload(): void {
     this.load.image("knight", "sprites/knight.png");
+    this.load.image("openDoor", "sprites/openDoor.png");
+    this.load.image("closedDoor", "sprites/closedDoor.png");
 
     this.load.atlas(
       "knight_atlas",

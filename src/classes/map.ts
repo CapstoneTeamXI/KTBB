@@ -27,7 +27,7 @@ export class Map {
         collidingTileColor: new Phaser.Display.Color(243, 234, 48, 255),
       });
     };
-    showDebugWalls(); //shows collision
+    // showDebugWalls(); //shows collision
     return { map, tileset, groundLayer, wallsLayer };
   }
 }
