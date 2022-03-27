@@ -16,7 +16,6 @@ export default function usePhaser(config: Types.Core.GameConfig) {
       // CHECK WINDOW RESIZE
       window.game = game.current;
       window.sizeChanged = () => {
-        console.log('resize event firing');
         if (window.game.isBooted) {
           if (timeout) {
             clearTimeout(timeout);
@@ -28,13 +27,10 @@ export default function usePhaser(config: Types.Core.GameConfig) {
               'style',
               `display: block; width: ${window.innerWidth}px; height: ${window.innerHeight}px;`
             );
-
-            console.log('window resize inside setTimeout');
           }, 100);
         }
       };
       window.onresize = () => window.sizeChanged();
-      console.log('window resize');
       // END CHECK WINDOW RESIZE
     }
   }, [config]);

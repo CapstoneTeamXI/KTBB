@@ -15,7 +15,7 @@ export class Map {
       tileWidth: 16,
       tileHeight: 16,
     });
-    tileset = map.addTilesetImage(key, "tiles");
+    tileset = map.addTilesetImage("dungeon", "tiles");
     groundLayer = map.createDynamicLayer("Ground", tileset, 0, 0);
     wallsLayer = map.createDynamicLayer("Walls", tileset, 0, 0);
     physics.world.setBounds(0, 0, wallsLayer.width, wallsLayer.height);
@@ -27,7 +27,7 @@ export class Map {
         collidingTileColor: new Phaser.Display.Color(243, 234, 48, 255),
       });
     };
-    showDebugWalls(); //shows collision
+    // showDebugWalls(); //shows collision
     return { map, tileset, groundLayer, wallsLayer };
   }
 }

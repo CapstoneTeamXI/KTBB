@@ -7,7 +7,8 @@ export class LoadingScene extends Scene {
 
   preload(): void {
     this.load.image("knight", "sprites/knight.png");
-    this.load.image("bossKey", "sprites/bossKey.png");
+    this.load.image("openDoor", "sprites/openDoor.png");
+    this.load.image("closedDoor", "sprites/closedDoor.png");
 
     this.load.atlas(
       "knight_atlas",
@@ -21,6 +22,7 @@ export class LoadingScene extends Scene {
     });
 
     this.load.tilemapTiledJSON("dungeon", "tilemaps/json/dungeon.json");
+    this.load.tilemapTiledJSON("dungeonBoss", "tilemaps/json/dungeonBoss.json");
 
     this.load.spritesheet("tiles_spr", "tilemaps/tiles/dungeon-16-16.png", {
       frameWidth: 16,

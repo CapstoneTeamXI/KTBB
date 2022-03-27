@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useEffect, useState } from 'react';
 import styles from './Game.module.css';
 import config from '../config';
 import usePhaser from '../hooks/usePhaser';
@@ -7,14 +7,14 @@ import { useFullscreen } from 'ahooks';
 export default function Game() {
   const { gameContainer } = usePhaser(config);
   const [isFullscreen, { toggleFullscreen }] = useFullscreen(gameContainer);
-  const [score, setScore] = useState(0);
+  // const [score, setScore] = useState(`00:00:00`);
 
   return (
     <div className={styles.game}>
       <div className={styles.gameContainer} ref={gameContainer}>
         <header>
           <h1>Kill The Big Bad</h1>
-          <div className={styles.score}>{score}</div>
+          {/* <div className={styles.score}>{score}</div> */}
         </header>
         <footer>
           <button
