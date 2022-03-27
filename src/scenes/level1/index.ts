@@ -39,6 +39,8 @@ export class Level1 extends Scene {
     this.player = new Player(this, 800, 1550);
     this.initCamera();
 
+    this.physics.add.staticSprite(805, 1570, "bossKey");
+
     Chest.initChests(
       this,
       this.map,
