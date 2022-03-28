@@ -40,7 +40,6 @@ export class Chest {
         console.log("chestContents after", chestContents);
         chestContents.shift();
         obj2.destroy();
-        scene.cameras.main.flash();
       });
     });
   }
