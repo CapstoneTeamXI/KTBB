@@ -2,7 +2,7 @@ import { Scene } from "phaser";
 import { Score, ScoreOperations } from "../../classes/score";
 import { EVENTS_NAME, GameStatus } from "../../consts";
 import { Text } from "../../classes/text";
-import { Timer } from '../../classes/timer';
+import { Timer } from "../../classes/timer";
 import { BossKeyContainer } from "../../classes/bossKeyContainer";
 
 export class UIScene extends Scene {
@@ -31,14 +31,14 @@ export class UIScene extends Scene {
     };
     this.monsterChestHandler = () => {
       this.score.changeValue(ScoreOperations.INCREASE, 100);
-      this.sound.play("pickupChest", { volume: 0.1 });
+      // this.sound.play("pickupChest", { volume: 0.1 });
     };
     this.enemyKilledHandler = () => {
       this.score.changeValue(ScoreOperations.INCREASE, 10);
     };
     this.gameEndHandler = (status) => {
-      this.cameras.main.setBackgroundColor('rgba(0,0,0,0.6)');
-      this.game.scene.pause('level-1-scene');
+      this.cameras.main.setBackgroundColor("rgba(0,0,0,0.6)");
+      this.game.scene.pause("level-1-scene");
       this.gameEndPhrase = new Text(
         this,
         this.game.scale.width / 2,
@@ -47,8 +47,8 @@ export class UIScene extends Scene {
           ? `YOU'VE BEEN SLAIN!\nCLICK TO RESTART`
           : `YOU ARE VICTORIOUS!\nCLICK TO RESTART`
       )
-        .setAlign('center')
-        .setColor(status === GameStatus.LOSE ? '#ff0000' : '#ffffff');
+        .setAlign("center")
+        .setColor(status === GameStatus.LOSE ? "#ff0000" : "#ffffff");
       this.gameEndPhrase.setPosition(
         this.game.scale.width / 2 - this.gameEndPhrase.width / 2,
         this.game.scale.height * 0.4
@@ -62,7 +62,7 @@ export class UIScene extends Scene {
           this.monsterChestHandler
         );
         this.game.events.off(EVENTS_NAME.gameEnd, this.gameEndHandler);
-        this.scene.get('level-1-scene').scene.restart();
+        this.scene.get("level-1-scene").scene.restart();
         this.scene.restart();
         this.alive = true;
         if (this.interval) {
