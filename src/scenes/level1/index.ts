@@ -18,6 +18,7 @@ export class Level1 extends Scene {
   private groundLayer!: Tilemaps.DynamicTilemapLayer;
   private onMap = true;
   private enableBossRoom = false;
+  private bossKeyValue: integer;
 
   private initCamera(): void {
     this.cameras.main.setSize(this.game.scale.width, this.game.scale.height);
@@ -120,7 +121,7 @@ export class Level1 extends Scene {
 
     setInterval(() => {
       if (this.onMap === true) {
-        if (this.player.level >= 2) {
+        if (this.bossKeyValue === 4) {
           this.enableBossRoom = true;
         }
         if (this.enableBossRoom === true) {
@@ -146,5 +147,6 @@ export class Level1 extends Scene {
 
   update(): void {
     this.player.update();
+    this.bossKeyValue = parseInt(localStorage.getItem("bossKeyValue")!);
   }
 }

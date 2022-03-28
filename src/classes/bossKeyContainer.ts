@@ -20,6 +20,7 @@ export class BossKeyContainer extends Text {
 
   public addBossKey(): void {
     this.bossKeyValue++;
+    localStorage.setItem("bossKeyValue", JSON.stringify(this.bossKeyValue));
     this.setText(`Boss Keys: ${this.bossKeyValue}/4`);
     if (this.bossKeyValue === 4) {
       this.setText(`BOSS DOOR OPEN, CHALLENGE HE IF YE DARE!`);
