@@ -35,9 +35,7 @@ export class Chest {
       chestContents.sort(() => Math.random() - 0.5);
 
       physics.add.overlap(player, chest, (_, obj2) => {
-        console.log("chestContents before", chestContents[0]);
         scene.game.events.emit(chestContents[0]);
-        console.log("chestContents after", chestContents);
         chestContents.shift();
         obj2.destroy();
         scene.cameras.main.flash();

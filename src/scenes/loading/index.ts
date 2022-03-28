@@ -31,7 +31,8 @@ export class LoadingScene extends Scene {
 
     this.load.audio("vopna", ["audio/music/Vopna.wav"]);
     this.load.audio("hammerSwipe", ["audio/fx/hammerSwipe.wav"]);
-    this.load.audio("pickupChest", ["audio/fx/pickupChest.wav"]);
+    this.load.audio("coinChest", ["audio/fx/coinChest.wav"]);
+    this.load.audio("keyChest", ["audio/fx/keyChest.wav"]);
     // this.load.audio("killEnemy", ["audio/fx/hammerSwipe.wav"]);
   }
 

@@ -1,11 +1,13 @@
-import { Scene } from 'phaser';
-import { Score, ScoreOperations } from '../../classes/score';
-import { EVENTS_NAME, GameStatus } from '../../consts';
-import { Text } from '../../classes/text';
+import { Scene } from "phaser";
+import { Score, ScoreOperations } from "../../classes/score";
+import { EVENTS_NAME, GameStatus } from "../../consts";
+import { Text } from "../../classes/text";
 import { Timer } from '../../classes/timer';
+import { BossKeyContainer } from "../../classes/bossKeyContainer";
 
 export class UIScene extends Scene {
   private score!: Score;
+  private bossKey!: BossKeyContainer;
   private keyChestHandler: () => void;
   private coinChestHandler: () => void;
   private monsterChestHandler: () => void;
@@ -19,12 +21,13 @@ export class UIScene extends Scene {
   constructor() {
     super("ui-scene");
     this.keyChestHandler = () => {
+      this.bossKey.addBossKey();
       this.score.changeValue(ScoreOperations.INCREASE, 10);
-      this.sound.play('pickupChest', { volume: 0.1 });
+      this.sound.play("keyChest", { volume: 0.1 });
     };
     this.coinChestHandler = () => {
       this.score.changeValue(ScoreOperations.INCREASE, 50);
-      this.sound.play("pickupChest", { volume: 0.1 });
+      this.sound.play("coinChest", { volume: 0.1 });
     };
     this.monsterChestHandler = () => {
       this.score.changeValue(ScoreOperations.INCREASE, 100);
@@ -89,6 +92,7 @@ export class UIScene extends Scene {
 
   create(): void {
     this.score = new Score(this, 20, 20, 0);
+    this.bossKey = new BossKeyContainer(this, 20, 100, 0);
     this.timer = new Timer(this, this.game.scale.width * 0.4, 20);
     this.initListeners();
   }
