@@ -17,8 +17,10 @@ export class Level1 extends Scene {
   private wallsLayer!: Tilemaps.DynamicTilemapLayer;
   private groundLayer!: Tilemaps.DynamicTilemapLayer;
   private onMap = true;
-  private enableBossRoom = false;
   private bossKeyValue: integer;
+  private closedDoorActor!: Actor;
+  private openDoorActor!: Actor;
+  private spawnTimer!: NodeJS.Timer;
 
   private initCamera(): void {
     this.cameras.main.setSize(this.game.scale.width, this.game.scale.height);
@@ -27,6 +29,7 @@ export class Level1 extends Scene {
   }
 
   create(): void {
+    localStorage.setItem("currentScene", JSON.stringify(this.scene.key));
     const updatedMap = Map.initMap(
       this,
       this.map,
@@ -41,11 +44,11 @@ export class Level1 extends Scene {
     this.wallsLayer = updatedMap.wallsLayer;
     this.player = new Player(this, 800, 1550);
     this.initCamera();
+    this.closedDoorActor = new Actor(this, 800, 384, "closedDoor");
+    this.closedDoorActor.setImmovable();
 
-    const closedDoor = new Actor(this, 800, 384, "closedDoor");
-    closedDoor.setImmovable();
-    this.physics.add.collider(this.player, closedDoor);
-    this.physics.add.collider(closedDoor, this.wallsLayer);
+    this.physics.add.collider(this.player, this.closedDoorActor);
+    this.physics.add.collider(this.closedDoorActor, this.wallsLayer);
 
     Chest.initChests(
       this,
@@ -67,7 +70,7 @@ export class Level1 extends Scene {
       "EnemyPoint"
     );
 
-    setInterval(() => {
+    this.spawnTimer = setInterval(() => {
       if (this.onMap === true) {
         if (this.player.level === 2) {
           Enemy.initEnemy(
@@ -122,12 +125,9 @@ export class Level1 extends Scene {
     setInterval(() => {
       if (this.onMap === true) {
         if (this.bossKeyValue === 4) {
-          this.enableBossRoom = true;
-        }
-        if (this.enableBossRoom === true) {
-          let openDoor = new Actor(this, 800, 384, "openDoor");
-          closedDoor.destroy();
-          this.physics.add.overlap(this.player, openDoor, () => {
+          this.closedDoorActor.destroy();
+          this.openDoorActor = new Actor(this, 800, 384, "openDoor");
+          this.physics.add.overlap(this.player, this.openDoorActor, () => {
             this.onMap = false;
             this.scene.start("level-1-boss-scene");
             localStorage.setItem(
@@ -139,14 +139,21 @@ export class Level1 extends Scene {
               "playerAttack",
               JSON.stringify(this.player.attack)
             );
+            localStorage.setItem("prevScene", JSON.stringify(this.scene.key));
           });
         }
       }
-    }, 5000);
+    }, 1000);
   }
 
   update(): void {
     this.player.update();
+    if (this.player.hp <= 0) {
+      this.sound.stopAll();
+      if (this.spawnTimer) {
+        clearInterval(this.spawnTimer);
+      }
+    }
     this.bossKeyValue = parseInt(localStorage.getItem("bossKeyValue")!);
   }
 }

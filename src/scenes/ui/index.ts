@@ -17,6 +17,8 @@ export class UIScene extends Scene {
   private gameEndHandler: (status: GameStatus) => void;
   private alive = true;
   private interval: NodeJS.Timer;
+  private currentScene!: string;
+  private prevScene!: string;
 
   constructor() {
     super("ui-scene");
@@ -38,7 +40,7 @@ export class UIScene extends Scene {
     };
     this.gameEndHandler = (status) => {
       this.cameras.main.setBackgroundColor("rgba(0,0,0,0.6)");
-      this.game.scene.pause("level-1-scene");
+      this.game.scene.pause(this.currentScene);
       this.gameEndPhrase = new Text(
         this,
         this.game.scale.width / 2,
@@ -62,8 +64,13 @@ export class UIScene extends Scene {
           this.monsterChestHandler
         );
         this.game.events.off(EVENTS_NAME.gameEnd, this.gameEndHandler);
-        this.scene.get("level-1-scene").scene.restart();
+        if (this.prevScene === null) {
+          this.scene.get(this.currentScene.replaceAll('"', "")).scene.restart();
+        } else if (this.prevScene !== null) {
+          this.scene.get(this.prevScene.replaceAll('"', "")).scene.restart();
+        }
         this.scene.restart();
+        localStorage.clear();
         this.alive = true;
         if (this.interval) {
           clearInterval(this.interval);
@@ -86,6 +93,8 @@ export class UIScene extends Scene {
     this.interval = setInterval(() => {
       if (this.alive === true) {
         this.timer.gameTimer();
+        this.currentScene = localStorage.getItem("currentScene")!;
+        this.prevScene = localStorage.getItem("prevScene")!;
       }
     }, 1000);
   }
