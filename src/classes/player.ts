@@ -74,52 +74,52 @@ export class Player extends Actor {
     }
     if (this.dashCooldown === false) {
       if (this.keyShift?.isDown && this.keyW?.isDown) {
-        this.iFrames = true;
+        this.dashiFrames = true;
         this.body.velocity.y = -899;
         setTimeout(() => {
           this.dashCooldown = true;
         }, 70);
         setTimeout(() => {
-          this.iFrames = false;
+          this.dashiFrames = false;
         }, 1000);
         setTimeout(() => {
           this.dashCooldown = false;
         }, 3000);
       }
       if (this.keyShift?.isDown && this.keyA?.isDown) {
-        this.iFrames = true;
+        this.dashiFrames = true;
         this.body.velocity.x = -899;
         setTimeout(() => {
           this.dashCooldown = true;
         }, 70);
         setTimeout(() => {
-          this.iFrames = false;
+          this.dashiFrames = false;
         }, 1000);
         setTimeout(() => {
           this.dashCooldown = false;
         }, 3000);
       }
       if (this.keyShift?.isDown && this.keyS?.isDown) {
-        this.iFrames = true;
+        this.dashiFrames = true;
         this.body.velocity.y = 899;
         setTimeout(() => {
           this.dashCooldown = true;
         }, 70);
         setTimeout(() => {
-          this.iFrames = false;
+          this.dashiFrames = false;
         }, 1000);
         setTimeout(() => {
           this.dashCooldown = false;
         }, 3000);
       }
       if (this.keyShift?.isDown && this.keyD?.isDown) {
-        this.iFrames = true;
+        this.dashiFrames = true;
         this.body.velocity.x = 899;
         setTimeout(() => {
           this.dashCooldown = true;
         }, 70);
         setTimeout(() => {
-          this.iFrames = false;
+          this.dashiFrames = false;
         }, 1000);
         setTimeout(() => {
           this.dashCooldown = false;

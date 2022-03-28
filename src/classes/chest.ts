@@ -38,7 +38,6 @@ export class Chest {
         scene.game.events.emit(chestContents[0]);
         chestContents.shift();
         obj2.destroy();
-        scene.cameras.main.flash();
       });
     });
   }
