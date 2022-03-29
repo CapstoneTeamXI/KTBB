@@ -18,6 +18,9 @@ export class UIScene extends Scene {
   private gameEndHandler: (status: GameStatus) => void;
   private alive = true;
   private interval: NodeJS.Timer;
+  private currentScene!: string;
+  private prevScene!: string;
+  private bossKillHandler: (status: GameStatus) => void;
 
   constructor() {
     super("ui-scene");
@@ -37,9 +40,50 @@ export class UIScene extends Scene {
     this.enemyKilledHandler = () => {
       this.score.changeValue(ScoreOperations.INCREASE, 10);
     };
+    this.bossKillHandler = (status) => {
+      this.score.changeValue(ScoreOperations.INCREASE, 2000);
+      if (this.interval) {
+        clearInterval(this.interval);
+      }
+      this.cameras.main.setBackgroundColor("rgba(0,0,0,0.6)");
+      this.game.scene.pause(this.currentScene);
+      this.gameEndPhrase = new Text(
+        this,
+        this.game.scale.width / 2,
+        this.game.scale.height * 0.4,
+        status === GameStatus.WIN
+          ? `YOU ARE VICTORIOUS!\nCLICK TO RESTART`
+          : `YOU'VE BEEN SLAIN!\nCLICK TO RESTART`
+      )
+        .setAlign("center")
+        .setColor(status === GameStatus.WIN ? "#fffffff" : "#ff0000");
+      this.gameEndPhrase.setPosition(
+        this.game.scale.width / 2 - this.gameEndPhrase.width / 2,
+        this.game.scale.height * 0.4
+      );
+      this.input.on("pointerdown", () => {
+        this.game.events.off(EVENTS_NAME.bossKilled, this.bossKillHandler);
+        this.game.events.off(EVENTS_NAME.keyChest, this.keyChestHandler);
+        this.game.events.off(EVENTS_NAME.coinChest, this.coinChestHandler);
+        this.game.events.off(
+          EVENTS_NAME.monsterChest,
+          this.monsterChestHandler
+        );
+        if (this.prevScene !== null) {
+          this.scene.get(this.currentScene.replaceAll('"', "")).scene.stop();
+          this.scene.get(this.prevScene.replaceAll('"', "")).scene.restart();
+          this.scene.start(this.prevScene.replaceAll('"', ""));
+        } else if (this.prevScene === null) {
+          this.scene.get(this.currentScene.replaceAll('"', "")).scene.restart();
+        }
+        this.sound.stopAll();
+        this.scene.restart();
+        localStorage.clear();
+      });
+    };
     this.gameEndHandler = (status) => {
       this.cameras.main.setBackgroundColor("rgba(0,0,0,0.6)");
-      this.game.scene.pause("level-1-scene");
+      this.game.scene.pause(this.currentScene);
       this.gameEndPhrase = new Text(
         this,
         this.game.scale.width / 2,
@@ -63,9 +107,19 @@ export class UIScene extends Scene {
           this.monsterChestHandler
         );
         this.game.events.off(EVENTS_NAME.gameEnd, this.gameEndHandler);
-        this.scene.get("level-1-scene").scene.stop();
-        this.scene.stop();
+
+        if (this.prevScene !== null) {
+          this.scene.get(this.currentScene.replaceAll('"', "")).scene.stop();
+          this.scene.get(this.prevScene.replaceAll('"', "")).scene.restart();
+          this.scene.start(this.prevScene.replaceAll('"', ""));
+        } else if (this.prevScene === null) {
+          this.scene.get(this.currentScene.replaceAll('"', "")).scene.restart();
+        }
+        this.sound.stopAll();
+        this.scene.restart();
+        localStorage.clear();
         // this.alive = true;
+
         if (this.interval) {
           clearInterval(this.interval);
         }
@@ -91,17 +145,23 @@ export class UIScene extends Scene {
     );
     this.game.events.on(EVENTS_NAME.enemyKilled, this.enemyKilledHandler, this);
     this.game.events.once(EVENTS_NAME.gameEnd, this.gameEndHandler, this);
+    this.game.events.once(EVENTS_NAME.bossKilled, this.bossKillHandler, this);
 
     this.interval = setInterval(() => {
       if (this.alive === true) {
         this.timer.gameTimer();
+        this.currentScene = localStorage.getItem("currentScene")!;
+        this.prevScene = localStorage.getItem("prevScene")!;
+        if (this.prevScene !== null && this.bossKey) {
+          this.bossKey.destroy();
+        }
       }
     }, 1000);
   }
 
   create(): void {
-    this.score = new Score(this, 20, 20, 0);
     this.bossKey = new BossKeyContainer(this, 20, 100, 0);
+    this.score = new Score(this, 20, 20, 0);
     this.timer = new Timer(this, this.game.scale.width * 0.4, 20);
     this.initListeners();
   }

@@ -67,6 +67,7 @@ export class Enemy extends Actor {
       ) < this.AGRESSOR_RADIUS
     ) {
       this.getBody().setVelocityX(this.target.x - this.x);
+      this.checkEnemyFlip();
       this.getBody().setVelocityY(this.target.y - this.y);
       if (this.enemyiFrames === true) {
         this.getBody().setVelocity(0);
@@ -74,10 +75,6 @@ export class Enemy extends Actor {
     } else {
       this.getBody().setVelocity(0);
     }
-  }
-
-  public setTarget(target: Player): void {
-    this.target = target;
   }
 
   private getEnemyDamage(value?: number): void {
@@ -134,5 +131,6 @@ export class Enemy extends Actor {
     physics.add.overlap(player, enemies, (obj1, _) => {
       (obj1 as Player).getDamage(player.level);
     });
+    return enemies;
   }
 }

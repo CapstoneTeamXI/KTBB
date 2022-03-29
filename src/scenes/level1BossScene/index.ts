@@ -1,8 +1,9 @@
 import { Scene, Tilemaps } from "phaser";
 import { Player } from "../../classes/player";
 import { Map } from "../../classes/map";
+import { Level1Boss } from "../../classes/level1Boss";
 
-export class Level1Boss extends Scene {
+export class Level1BossScene extends Scene {
   constructor() {
     super("level-1-boss-scene");
   }
@@ -12,6 +13,7 @@ export class Level1Boss extends Scene {
   private tileset!: Tilemaps.Tileset;
   private wallsLayer!: Tilemaps.DynamicTilemapLayer;
   private groundLayer!: Tilemaps.DynamicTilemapLayer;
+  private boss!: Level1Boss;
 
   private initCamera(): void {
     this.cameras.main.setSize(this.game.scale.width, this.game.scale.height);
@@ -20,6 +22,7 @@ export class Level1Boss extends Scene {
   }
 
   create(): void {
+    localStorage.setItem("currentScene", JSON.stringify(this.scene.key));
     const updatedMap = Map.initMap(
       this,
       this.map,
@@ -39,9 +42,16 @@ export class Level1Boss extends Scene {
     this.initCamera();
 
     this.physics.add.collider(this.player, this.wallsLayer);
+
+    this.boss = new Level1Boss(this, 800, 1380, "orcBoss", this.player);
+    this.physics.add.collider(this.boss, this.wallsLayer);
+    this.physics.add.overlap(this.player, this.boss, (obj1, _) => {
+      (obj1 as Player).getDamage(10);
+    });
   }
 
   update(): void {
     this.player.update();
+    this.boss.update();
   }
 }
