@@ -5,7 +5,7 @@ import usePhaser from '../hooks/usePhaser';
 import { useFullscreen } from 'ahooks';
 import { useDispatch, useSelector } from 'react-redux';
 import React from 'react';
-import { addPlayer } from '../store';
+import { addPlayer, GAME_RESTART } from '../store';
 import { useNavigate } from 'react-router-dom';
 
 export default function Game() {
@@ -34,6 +34,7 @@ export default function Game() {
         completedTime: completedTime,
       };
       dispatch(addPlayer(player, navigate));
+      dispatch({ type: GAME_RESTART });
     }
   };
 

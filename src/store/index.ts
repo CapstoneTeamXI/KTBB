@@ -13,6 +13,7 @@ const initialState: PlayerState = {
 // ACTION TYPES
 export const ADD_PLAYER = 'ADD_PLAYER';
 export const GAME_OVER = 'GAME_OVER';
+export const GAME_RESTART = 'GAME_RESTART';
 export const GET_GAME_STATS = 'GET_GAME_STATS';
 
 export const _addPlayer = (player: IPlayer) => ({
@@ -22,6 +23,10 @@ export const _addPlayer = (player: IPlayer) => ({
 
 export const gameOver = () => ({
   type: GAME_OVER,
+});
+
+export const gameRestart = () => ({
+  type: GAME_RESTART,
 });
 
 export const getGameStats = (gameStats: IGameStats) => ({
@@ -50,6 +55,8 @@ const reducer = (
       return { ...state, player: action.player };
     case GAME_OVER:
       return { ...state, gameOver: true };
+    case GAME_RESTART:
+      return { ...state, gameOver: false };
     case GET_GAME_STATS:
       return { ...state, gameStats: action.gameStats };
     default:

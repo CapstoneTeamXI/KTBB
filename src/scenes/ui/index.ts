@@ -1,10 +1,10 @@
-import { Scene } from "phaser";
-import { Score, ScoreOperations } from "../../classes/score";
-import { EVENTS_NAME, GameStatus } from "../../consts";
-import { Text } from "../../classes/text";
-import { Timer } from "../../classes/timer";
-import store, { GAME_OVER, GET_GAME_STATS } from "../../store";
-import { BossKeyContainer } from "../../classes/bossKeyContainer";
+import { Scene } from 'phaser';
+import { Score, ScoreOperations } from '../../classes/score';
+import { EVENTS_NAME, GameStatus } from '../../consts';
+import { Text } from '../../classes/text';
+import { Timer } from '../../classes/timer';
+import store, { GAME_OVER, GET_GAME_STATS } from '../../store';
+import { BossKeyContainer } from '../../classes/bossKeyContainer';
 
 export class UIScene extends Scene {
   private score!: Score;
@@ -23,19 +23,19 @@ export class UIScene extends Scene {
   private bossKillHandler: (status: GameStatus) => void;
 
   constructor() {
-    super("ui-scene");
+    super('ui-scene');
     this.keyChestHandler = () => {
       this.bossKey.addBossKey();
       this.score.changeValue(ScoreOperations.INCREASE, 10);
-      this.sound.play("keyChest", { volume: 0.1 });
+      this.sound.play('keyChest', { volume: 0.1 });
     };
     this.coinChestHandler = () => {
       this.score.changeValue(ScoreOperations.INCREASE, 30);
-      this.sound.play("coinChest", { volume: 0.1 });
+      this.sound.play('coinChest', { volume: 0.1 });
     };
     this.monsterChestHandler = () => {
       this.score.changeValue(ScoreOperations.INCREASE, 50);
-      this.sound.play("coinChest", { volume: 0.1 });
+      this.sound.play('coinChest', { volume: 0.1 });
     };
     this.enemyKilledHandler = () => {
       this.score.changeValue(ScoreOperations.INCREASE, 10);
@@ -45,7 +45,7 @@ export class UIScene extends Scene {
       if (this.interval) {
         clearInterval(this.interval);
       }
-      this.cameras.main.setBackgroundColor("rgba(0,0,0,0.6)");
+      this.cameras.main.setBackgroundColor('rgba(0,0,0,0.6)');
       this.game.scene.pause(this.currentScene);
       this.gameEndPhrase = new Text(
         this,
@@ -55,13 +55,13 @@ export class UIScene extends Scene {
           ? `YOU ARE VICTORIOUS!\nCLICK TO RESTART`
           : `YOU'VE BEEN SLAIN!\nCLICK TO RESTART`
       )
-        .setAlign("center")
-        .setColor(status === GameStatus.WIN ? "#fffffff" : "#ff0000");
+        .setAlign('center')
+        .setColor(status === GameStatus.WIN ? '#fffffff' : '#ff0000');
       this.gameEndPhrase.setPosition(
         this.game.scale.width / 2 - this.gameEndPhrase.width / 2,
         this.game.scale.height * 0.4
       );
-      this.input.on("pointerdown", () => {
+      this.input.on('pointerdown', () => {
         this.game.events.off(EVENTS_NAME.bossKilled, this.bossKillHandler);
         this.game.events.off(EVENTS_NAME.keyChest, this.keyChestHandler);
         this.game.events.off(EVENTS_NAME.coinChest, this.coinChestHandler);
@@ -70,11 +70,11 @@ export class UIScene extends Scene {
           this.monsterChestHandler
         );
         if (this.prevScene !== null) {
-          this.scene.get(this.currentScene.replaceAll('"', "")).scene.stop();
-          this.scene.get(this.prevScene.replaceAll('"', "")).scene.restart();
-          this.scene.start(this.prevScene.replaceAll('"', ""));
+          this.scene.get(this.currentScene.replaceAll('"', '')).scene.stop();
+          this.scene.get(this.prevScene.replaceAll('"', '')).scene.restart();
+          this.scene.start(this.prevScene.replaceAll('"', ''));
         } else if (this.prevScene === null) {
-          this.scene.get(this.currentScene.replaceAll('"', "")).scene.restart();
+          this.scene.get(this.currentScene.replaceAll('"', '')).scene.restart();
         }
         this.sound.stopAll();
         this.scene.restart();
@@ -82,7 +82,7 @@ export class UIScene extends Scene {
       });
     };
     this.gameEndHandler = (status) => {
-      this.cameras.main.setBackgroundColor("rgba(0,0,0,0.6)");
+      this.cameras.main.setBackgroundColor('rgba(0,0,0,0.6)');
       this.game.scene.pause(this.currentScene);
       this.gameEndPhrase = new Text(
         this,
@@ -92,14 +92,14 @@ export class UIScene extends Scene {
           ? `YOU'VE BEEN SLAIN!\nCLICK TO RESTART`
           : `YOU ARE VICTORIOUS!\nCLICK TO RESTART`
       )
-        .setAlign("center")
-        .setColor(status === GameStatus.LOSE ? "#ff0000" : "#ffffff");
+        .setAlign('center')
+        .setColor(status === GameStatus.LOSE ? '#ff0000' : '#ffffff');
       this.gameEndPhrase.setPosition(
         this.game.scale.width / 2 - this.gameEndPhrase.width / 2,
         this.game.scale.height * 0.4
       );
       this.alive = false;
-      this.input.on("pointerdown", () => {
+      this.input.on('pointerdown', () => {
         this.game.events.off(EVENTS_NAME.keyChest, this.keyChestHandler);
         this.game.events.off(EVENTS_NAME.coinChest, this.coinChestHandler);
         this.game.events.off(
@@ -109,16 +109,16 @@ export class UIScene extends Scene {
         this.game.events.off(EVENTS_NAME.gameEnd, this.gameEndHandler);
 
         if (this.prevScene !== null) {
-          this.scene.get(this.currentScene.replaceAll('"', "")).scene.stop();
-          this.scene.get(this.prevScene.replaceAll('"', "")).scene.restart();
-          this.scene.start(this.prevScene.replaceAll('"', ""));
+          this.scene.get(this.currentScene.replaceAll('"', '')).scene.stop();
+          this.scene.get(this.prevScene.replaceAll('"', '')).scene.restart();
+          this.scene.start(this.prevScene.replaceAll('"', ''));
         } else if (this.prevScene === null) {
-          this.scene.get(this.currentScene.replaceAll('"', "")).scene.restart();
+          this.scene.get(this.currentScene.replaceAll('"', '')).scene.restart();
         }
         this.sound.stopAll();
         this.scene.restart();
         localStorage.clear();
-        // this.alive = true;
+        this.alive = true;
 
         if (this.interval) {
           clearInterval(this.interval);
@@ -150,8 +150,8 @@ export class UIScene extends Scene {
     this.interval = setInterval(() => {
       if (this.alive === true) {
         this.timer.gameTimer();
-        this.currentScene = localStorage.getItem("currentScene")!;
-        this.prevScene = localStorage.getItem("prevScene")!;
+        this.currentScene = localStorage.getItem('currentScene')!;
+        this.prevScene = localStorage.getItem('prevScene')!;
         if (this.prevScene !== null && this.bossKey) {
           this.bossKey.destroy();
         }
