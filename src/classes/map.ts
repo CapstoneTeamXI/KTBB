@@ -20,13 +20,13 @@ export class Map {
     wallsLayer = map.createDynamicLayer("Walls", tileset, 0, 0);
     physics.world.setBounds(0, 0, wallsLayer.width, wallsLayer.height);
     wallsLayer.setCollisionByProperty({ collides: true });
-    const showDebugWalls: Function = () => {
+    function showDebugWalls(): void {
       const debugGraphics = scene.add.graphics().setAlpha(0.7);
       wallsLayer.renderDebug(debugGraphics, {
         tileColor: null,
         collidingTileColor: new Phaser.Display.Color(243, 234, 48, 255),
       });
-    };
+    }
     // showDebugWalls(); //shows collision
     return { map, tileset, groundLayer, wallsLayer };
   }

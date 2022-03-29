@@ -20,20 +20,19 @@ export class Chest {
         .sprite(chestPoint.x, chestPoint.y, "tiles_spr", chestType)
         .setScale(1.5)
     );
+    let chestContents = [
+      EVENTS_NAME.keyChest,
+      EVENTS_NAME.keyChest,
+      EVENTS_NAME.keyChest,
+      EVENTS_NAME.keyChest,
+      EVENTS_NAME.coinChest,
+      EVENTS_NAME.coinChest,
+      EVENTS_NAME.coinChest,
+      EVENTS_NAME.monsterChest,
+      EVENTS_NAME.monsterChest,
+    ];
     chests.forEach((chest) => {
-      let chestContents = [
-        EVENTS_NAME.keyChest,
-        EVENTS_NAME.keyChest,
-        EVENTS_NAME.keyChest,
-        EVENTS_NAME.keyChest,
-        EVENTS_NAME.coinChest,
-        EVENTS_NAME.coinChest,
-        EVENTS_NAME.coinChest,
-        EVENTS_NAME.monsterChest,
-        EVENTS_NAME.monsterChest,
-      ];
       chestContents.sort(() => Math.random() - 0.5);
-
       physics.add.overlap(player, chest, (_, obj2) => {
         scene.game.events.emit(chestContents[0]);
         chestContents.shift();

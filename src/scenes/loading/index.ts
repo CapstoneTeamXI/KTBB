@@ -9,11 +9,18 @@ export class LoadingScene extends Scene {
     this.load.image("knight", "sprites/knight.png");
     this.load.image("openDoor", "sprites/openDoor.png");
     this.load.image("closedDoor", "sprites/closedDoor.png");
+    this.load.image("orcBoss", "sprites/orcBoss.png");
 
     this.load.atlas(
       "knight_atlas",
       "spritesheets/knight.png",
       "spritesheets/knight_atlas.json"
+    );
+
+    this.load.atlas(
+      "orcboss_atlas",
+      "spritesheets/orcboss.png",
+      "spritesheets/orcboss_atlas.json"
     );
 
     this.load.image({
@@ -29,7 +36,7 @@ export class LoadingScene extends Scene {
       frameHeight: 16,
     });
 
-    this.load.audio("vopna", ["audio/music/Vopna.wav"]);
+    this.load.audio("monsterVania", ["audio/music/MonsterVania.mp3"]);
     this.load.audio("hammerSwipe", ["audio/fx/hammerSwipe.wav"]);
     this.load.audio("coinChest", ["audio/fx/coinChest.wav"]);
     this.load.audio("keyChest", ["audio/fx/keyChest.wav"]);

@@ -3,7 +3,6 @@ import Phaser from 'phaser'
 
 import { PressStart2P } from '../consts/Fonts'
 
-import * as AudioKeys from '../consts/AudioKeys'
 
 export class TitleScreen extends Phaser.Scene
 {

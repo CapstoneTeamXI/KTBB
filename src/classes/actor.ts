@@ -42,7 +42,6 @@ export class Actor extends Physics.Arcade.Sprite {
       this.iFrames = true;
       setTimeout(() => {
         this.iFrames = false;
-        console.log(this.iFrames);
       }, 700);
     }
   }
@@ -56,6 +55,16 @@ export class Actor extends Physics.Arcade.Sprite {
       this.scaleX = -1;
     } else {
       this.scaleX = 1;
+    }
+  }
+
+  protected checkEnemyFlip(): void {
+    if (this.body.velocity.x < 0) {
+      this.scaleX = -1.5;
+      this.getBody().setOffset(15, 0);
+    } else {
+      this.scaleX = 1.5;
+      this.getBody().setOffset(3, 0);
     }
   }
 
