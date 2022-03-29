@@ -3,6 +3,7 @@ import { Score, ScoreOperations } from '../../classes/score';
 import { EVENTS_NAME, GameStatus } from '../../consts';
 import { Text } from '../../classes/text';
 import { Timer } from '../../classes/timer';
+import store, { GAME_OVER, GET_GAME_STATS } from '../../store';
 
 export class UIScene extends Scene {
   private score!: Score;
@@ -45,12 +46,20 @@ export class UIScene extends Scene {
       this.input.on('pointerdown', () => {
         this.game.events.off(EVENTS_NAME.chestLoot, this.chestLootHandler);
         this.game.events.off(EVENTS_NAME.gameEnd, this.gameEndHandler);
-        this.scene.get('level-1-scene').scene.restart();
-        this.scene.restart();
-        this.alive = true;
+        this.scene.get('level-1-scene').scene.stop();
+        this.scene.stop();
+        // this.alive = true;
         if (this.interval) {
           clearInterval(this.interval);
         }
+        store.dispatch<any>({ type: GAME_OVER });
+        store.dispatch<any>({
+          type: GET_GAME_STATS,
+          gameStats: {
+            score: this.score.getValue(),
+            completedTime: this.timer.getValue(),
+          },
+        });
       });
     };
   }

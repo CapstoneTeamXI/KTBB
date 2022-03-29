@@ -2,14 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Home() {
-  interface Player {
-    id: number;
-    name: string;
-    score: number;
-    completedTime: string;
-  }
-
-  const [players, setPlayers] = useState<Array<Player>>([]);
+  const [players, setPlayers] = useState<Array<IPlayer>>([]);
 
   useEffect(() => {
     getPlayers();

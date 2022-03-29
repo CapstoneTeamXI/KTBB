@@ -5,6 +5,7 @@
   "type": "module",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
@@ -13,8 +14,13 @@
     "@types/node": "^16.11.26",
     "@types/react": "^17.0.40",
     "@types/react-dom": "^17.0.13",
+    "@types/react-redux": "^7.1.23",
     "@types/react-router-dom": "^5.3.3",
+    "@types/redux": "^3.6.0",
+    "@types/redux-devtools-extension": "^2.13.2",
+    "@types/redux-thunk": "^2.1.0",
     "ahooks": "^3.1.13",
+    "axios": "^0.26.1",
     "express": "^4.17.3",
     "morgan": "^1.10.0",
     "npm-run-all": "^4.1.5",
@@ -23,8 +29,12 @@
     "phaser": "^3.24.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.4.1",
     "sequelize-typescript": "^2.1.3",
     "serve": "^13.0.2",
     "ts-node-dev": "^1.1.8",
@@ -60,5 +70,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/redux-logger": "^3.0.9"
   }
 }
