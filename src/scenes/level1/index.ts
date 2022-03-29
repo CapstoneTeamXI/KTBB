@@ -113,7 +113,7 @@ export class Level1 extends Scene {
     }, 60000);
     this.physics.add.collider(this.player, this.wallsLayer);
 
-    this.sound.play("vopna", {
+    this.sound.play("monsterVania", {
       mute: false,
       volume: 0.1,
       rate: 1,

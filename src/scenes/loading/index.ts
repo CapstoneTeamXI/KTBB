@@ -36,7 +36,7 @@ export class LoadingScene extends Scene {
       frameHeight: 16,
     });
 
-    this.load.audio("vopna", ["audio/music/Vopna.wav"]);
+    this.load.audio("monsterVania", ["audio/music/MonsterVania.mp3"]);
     this.load.audio("hammerSwipe", ["audio/fx/hammerSwipe.wav"]);
     this.load.audio("coinChest", ["audio/fx/coinChest.wav"]);
     this.load.audio("keyChest", ["audio/fx/keyChest.wav"]);
