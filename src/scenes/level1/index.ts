@@ -29,6 +29,7 @@ export class Level1 extends Scene {
   }
 
   create(): void {
+    this.onMap = true;
     localStorage.setItem("currentScene", JSON.stringify(this.scene.key));
     const updatedMap = Map.initMap(
       this,
@@ -123,25 +124,26 @@ export class Level1 extends Scene {
     });
 
     setInterval(() => {
-      if (this.onMap === true) {
-        if (this.bossKeyValue === 4) {
-          this.closedDoorActor.destroy();
-          this.openDoorActor = new Actor(this, 800, 384, "openDoor");
-          this.physics.add.overlap(this.player, this.openDoorActor, () => {
-            this.onMap = false;
-            this.scene.start("level-1-boss-scene");
-            localStorage.setItem(
-              "playerLevel",
-              JSON.stringify(this.player.level)
-            );
-            localStorage.setItem("playerHP", JSON.stringify(this.player.hp));
-            localStorage.setItem(
-              "playerAttack",
-              JSON.stringify(this.player.attack)
-            );
-            localStorage.setItem("prevScene", JSON.stringify(this.scene.key));
-          });
-        }
+      if (this.bossKeyValue === 4) {
+        this.closedDoorActor.destroy();
+        this.openDoorActor = new Actor(this, 800, 384, "openDoor");
+        this.physics.add.overlap(this.player, this.openDoorActor, () => {
+          this.scene.start("level-1-boss-scene");
+          localStorage.setItem(
+            "playerLevel",
+            JSON.stringify(this.player.level)
+          );
+          localStorage.setItem("playerHP", JSON.stringify(this.player.hp));
+          localStorage.setItem(
+            "playerAttack",
+            JSON.stringify(this.player.attack)
+          );
+          localStorage.setItem("prevScene", JSON.stringify(this.scene.key));
+          this.scene.get(this.scene.key).scene.stop();
+          if (this.spawnTimer) {
+            clearInterval(this.spawnTimer);
+          }
+        });
       }
     }, 1000);
   }

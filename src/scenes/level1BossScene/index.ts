@@ -54,5 +54,8 @@ export class Level1BossScene extends Scene {
   update(): void {
     this.player.update();
     this.boss.update();
+    if (this.player.hp <= 0) {
+      this.sound.stopAll();
+    }
   }
 }

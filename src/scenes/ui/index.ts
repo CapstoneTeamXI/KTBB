@@ -64,10 +64,12 @@ export class UIScene extends Scene {
           this.monsterChestHandler
         );
         this.game.events.off(EVENTS_NAME.gameEnd, this.gameEndHandler);
-        if (this.prevScene === null) {
-          this.scene.get(this.currentScene.replaceAll('"', "")).scene.restart();
-        } else if (this.prevScene !== null) {
+        if (this.prevScene !== null) {
+          this.scene.get(this.currentScene.replaceAll('"', "")).scene.stop();
           this.scene.get(this.prevScene.replaceAll('"', "")).scene.restart();
+          this.scene.start(this.prevScene.replaceAll('"', ""));
+        } else if (this.prevScene === null) {
+          this.scene.get(this.currentScene.replaceAll('"', "")).scene.restart();
         }
         this.scene.restart();
         localStorage.clear();
