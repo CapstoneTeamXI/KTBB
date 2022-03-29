@@ -44,6 +44,12 @@ export class Timer extends Text {
   }
 
   public getValue(): string {
-    return this.timer;
+    if (this.hour > 0) {
+      return `${this.hour} hr ${this.minute} min ${this.second} sec`;
+    }
+    if (this.minute > 0) {
+      return `${this.minute} min ${this.second} sec`;
+    }
+    return `${this.second} sec`;
   }
 }
