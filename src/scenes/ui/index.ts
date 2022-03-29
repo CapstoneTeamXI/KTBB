@@ -43,6 +43,14 @@ export class UIScene extends Scene {
     this.gameEndHandler = (status) => {
       if (status === GameStatus.WIN) {
         this.score.changeValue(ScoreOperations.INCREASE, 2000);
+        store.dispatch<any>({ type: GAME_OVER });
+        store.dispatch<any>({
+          type: GET_GAME_STATS,
+          gameStats: {
+            score: this.score.getValue(),
+            completedTime: this.timer.getValue(),
+          },
+        });
       }
       this.cameras.main.setBackgroundColor("rgba(0,0,0,0.6)");
       this.game.scene.pause(this.currentScene);
@@ -80,19 +88,19 @@ export class UIScene extends Scene {
         this.sound.stopAll();
         this.scene.restart();
         localStorage.clear();
-        // this.alive = true;
+        this.alive = true;
 
         if (this.interval) {
           clearInterval(this.interval);
         }
-        store.dispatch<any>({ type: GAME_OVER });
-        store.dispatch<any>({
-          type: GET_GAME_STATS,
-          gameStats: {
-            score: this.score.getValue(),
-            completedTime: this.timer.getValue(),
-          },
-        });
+        // store.dispatch<any>({ type: GAME_OVER });
+        // store.dispatch<any>({
+        //   type: GET_GAME_STATS,
+        //   gameStats: {
+        //     score: this.score.getValue(),
+        //     completedTime: this.timer.getValue(),
+        //   },
+        // });
       });
     };
   }
