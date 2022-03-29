@@ -26,7 +26,7 @@ export class Player extends Actor {
       if (this.soundDelay === false) {
         this.soundDelay = true;
         this.anims.play("attack", true);
-        this.scene.sound.play("hammerSwipe", { volume: 0.1 });
+        this.scene.sound.play("hammerSwipe", { volume: 0.03 });
         setTimeout(() => {
           this.soundDelay = false;
         }, 370);
