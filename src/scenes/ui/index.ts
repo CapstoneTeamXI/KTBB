@@ -93,14 +93,6 @@ export class UIScene extends Scene {
         if (this.interval) {
           clearInterval(this.interval);
         }
-        // store.dispatch<any>({ type: GAME_OVER });
-        // store.dispatch<any>({
-        //   type: GET_GAME_STATS,
-        //   gameStats: {
-        //     score: this.score.getValue(),
-        //     completedTime: this.timer.getValue(),
-        //   },
-        // });
       });
     };
   }
