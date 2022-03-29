@@ -1,9 +1,10 @@
-import { Scene } from "phaser";
-import { Score, ScoreOperations } from "../../classes/score";
-import { EVENTS_NAME, GameStatus } from "../../consts";
-import { Text } from "../../classes/text";
-import { Timer } from "../../classes/timer";
-import { BossKeyContainer } from "../../classes/bossKeyContainer";
+import { Scene } from 'phaser';
+import { Score, ScoreOperations } from '../../classes/score';
+import { EVENTS_NAME, GameStatus } from '../../consts';
+import { Text } from '../../classes/text';
+import { Timer } from '../../classes/timer';
+import store, { GAME_OVER, GET_GAME_STATS } from '../../store';
+import { BossKeyContainer } from '../../classes/bossKeyContainer';
 
 export class UIScene extends Scene {
   private score!: Score;
@@ -22,19 +23,19 @@ export class UIScene extends Scene {
   private bossKillHandler: (status: GameStatus) => void;
 
   constructor() {
-    super("ui-scene");
+    super('ui-scene');
     this.keyChestHandler = () => {
       this.bossKey.addBossKey();
       this.score.changeValue(ScoreOperations.INCREASE, 10);
-      this.sound.play("keyChest", { volume: 0.1 });
+      this.sound.play('keyChest', { volume: 0.1 });
     };
     this.coinChestHandler = () => {
       this.score.changeValue(ScoreOperations.INCREASE, 50);
-      this.sound.play("coinChest", { volume: 0.1 });
+      this.sound.play('coinChest', { volume: 0.1 });
     };
     this.monsterChestHandler = () => {
       this.score.changeValue(ScoreOperations.INCREASE, 100);
-      // this.sound.play("pickupChest", { volume: 0.1 });
+      this.sound.play('pickupChest', { volume: 0.1 });
     };
     this.enemyKilledHandler = () => {
       this.score.changeValue(ScoreOperations.INCREASE, 10);
@@ -98,7 +99,7 @@ export class UIScene extends Scene {
         this.game.scale.height * 0.4
       );
       this.alive = false;
-      this.input.on("pointerdown", () => {
+      this.input.on('pointerdown', () => {
         this.game.events.off(EVENTS_NAME.keyChest, this.keyChestHandler);
         this.game.events.off(EVENTS_NAME.coinChest, this.coinChestHandler);
         this.game.events.off(
@@ -120,6 +121,14 @@ export class UIScene extends Scene {
         if (this.interval) {
           clearInterval(this.interval);
         }
+        store.dispatch<any>({ type: GAME_OVER });
+        store.dispatch<any>({
+          type: GET_GAME_STATS,
+          gameStats: {
+            score: this.score.getValue(),
+            completedTime: this.timer.getValue(),
+          },
+        });
       });
     };
   }
