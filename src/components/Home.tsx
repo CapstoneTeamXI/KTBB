@@ -45,10 +45,11 @@ export default function Home() {
       ) : (
         // Render a helpful message otherwise
         <div>
-          <h1>No scores :(</h1>
-          <button className="more" onClick={getPlayers}>
-            Try Again?
-          </button>
+          <h1>No scores yet!</h1>
+          <br></br>
+          <Link to="/game">
+            <button className="more">New Game</button>
+          </Link>
         </div>
       )}
     </div>
