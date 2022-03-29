@@ -5,7 +5,6 @@ export enum EVENTS_NAME {
   keyChest = "key-chest",
   coinChest = "coin-chest",
   monsterChest = "monster-chest",
-  bossKilled = "boss-killed",
 }
 
 export enum GameStatus {
