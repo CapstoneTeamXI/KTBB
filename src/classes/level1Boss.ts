@@ -70,7 +70,7 @@ export class Level1Boss extends Actor {
         this.alive = false;
         this.disableBody(true, false);
         this.scene.time.delayedCall(0, () => {
-          this.scene.game.events.emit(EVENTS_NAME.bossKilled, GameStatus.WIN);
+          this.scene.game.events.emit(EVENTS_NAME.gameEnd, GameStatus.WIN);
           this.destroy();
           this.hpValue.destroy();
         });

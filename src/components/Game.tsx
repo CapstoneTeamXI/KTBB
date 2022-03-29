@@ -43,7 +43,7 @@ export default function Game() {
       <div className={styles.game}>
         <div className={styles.gameContainer} ref={gameContainer}>
           <header>
-            <h1>Kill The Big Bad</h1>
+            {/* <h1>Kill The Big Bad</h1> */}
             {/* <div className={styles.score}>{score}</div> */}
           </header>
           {isGameOver ? <div>Game Over!</div> : null}
