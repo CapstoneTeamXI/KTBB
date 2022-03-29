@@ -44,7 +44,6 @@ export class Level1BossScene extends Scene {
     this.physics.add.collider(this.player, this.wallsLayer);
 
     this.boss = new Level1Boss(this, 800, 1380, "orcBoss", this.player);
-    this.boss.setImmovable();
     this.physics.add.collider(this.boss, this.wallsLayer);
     this.physics.add.overlap(this.player, this.boss, (obj1, _) => {
       (obj1 as Player).getDamage(10);
@@ -54,8 +53,5 @@ export class Level1BossScene extends Scene {
   update(): void {
     this.player.update();
     this.boss.update();
-    if (this.player.hp <= 0) {
-      this.sound.stopAll();
-    }
   }
 }

@@ -4,7 +4,7 @@ import { Text } from "./text";
 // }
 
 export class BossKeyContainer extends Text {
-  private bossKeyValue: integer;
+  bossKeyValue: integer;
 
   constructor(scene: Phaser.Scene, x: number, y: number, bossKeyCount = 0) {
     super(scene, x, y, `Boss Keys: ${bossKeyCount}/4`);

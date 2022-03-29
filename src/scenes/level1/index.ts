@@ -151,7 +151,6 @@ export class Level1 extends Scene {
   update(): void {
     this.player.update();
     if (this.player.hp <= 0) {
-      this.sound.stopAll();
       if (this.spawnTimer) {
         clearInterval(this.spawnTimer);
       }
