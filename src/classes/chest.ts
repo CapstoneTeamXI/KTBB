@@ -21,10 +21,23 @@ export class Chest {
         .setScale(1.5)
     );
     chests.forEach((chest) => {
+      let chestContents = [
+        EVENTS_NAME.keyChest,
+        EVENTS_NAME.keyChest,
+        EVENTS_NAME.keyChest,
+        EVENTS_NAME.keyChest,
+        EVENTS_NAME.coinChest,
+        EVENTS_NAME.coinChest,
+        EVENTS_NAME.coinChest,
+        EVENTS_NAME.monsterChest,
+        EVENTS_NAME.monsterChest,
+      ];
+      chestContents.sort(() => Math.random() - 0.5);
+
       physics.add.overlap(player, chest, (_, obj2) => {
-        scene.game.events.emit(EVENTS_NAME.chestLoot);
+        scene.game.events.emit(chestContents[0]);
+        chestContents.shift();
         obj2.destroy();
-        scene.cameras.main.flash();
       });
     });
   }

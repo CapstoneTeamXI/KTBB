@@ -6,16 +6,10 @@ export class LoadingScene extends Scene {
   }
 
   preload(): void {
-    // this.load.baseURL = 'assets/';
-
-    this.load.image("king", "sprites/king.png");
     this.load.image("knight", "sprites/knight.png");
+    this.load.image("openDoor", "sprites/openDoor.png");
+    this.load.image("closedDoor", "sprites/closedDoor.png");
 
-    this.load.atlas(
-      "a-king",
-      "spritesheets/a-king.png",
-      "spritesheets/a-king_atlas.json"
-    );
     this.load.atlas(
       "knight_atlas",
       "spritesheets/knight.png",
@@ -28,6 +22,7 @@ export class LoadingScene extends Scene {
     });
 
     this.load.tilemapTiledJSON("dungeon", "tilemaps/json/dungeon.json");
+    this.load.tilemapTiledJSON("dungeonBoss", "tilemaps/json/dungeonBoss.json");
 
     this.load.spritesheet("tiles_spr", "tilemaps/tiles/dungeon-16-16.png", {
       frameWidth: 16,
@@ -36,7 +31,8 @@ export class LoadingScene extends Scene {
 
     this.load.audio("vopna", ["audio/music/Vopna.wav"]);
     this.load.audio("hammerSwipe", ["audio/fx/hammerSwipe.wav"]);
-    this.load.audio("pickupChest", ["audio/fx/pickupChest.wav"]);
+    this.load.audio("coinChest", ["audio/fx/coinChest.wav"]);
+    this.load.audio("keyChest", ["audio/fx/keyChest.wav"]);
     // this.load.audio("killEnemy", ["audio/fx/hammerSwipe.wav"]);
   }
 

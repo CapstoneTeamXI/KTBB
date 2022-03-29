@@ -7,6 +7,7 @@ export class Actor extends Physics.Arcade.Sprite {
   currentXP = 0;
   attack = 1;
   protected iFrames = false;
+  protected dashiFrames = false;
   protected enemyiFrames = false;
   constructor(
     scene: Phaser.Scene,
@@ -22,7 +23,7 @@ export class Actor extends Physics.Arcade.Sprite {
   }
 
   public getDamage(value?: number): void {
-    if (this.iFrames === false) {
+    if (this.iFrames === false && this.dashiFrames === false) {
       this.scene.tweens.add({
         targets: this,
         duration: 100,
@@ -41,6 +42,7 @@ export class Actor extends Physics.Arcade.Sprite {
       this.iFrames = true;
       setTimeout(() => {
         this.iFrames = false;
+        console.log(this.iFrames);
       }, 700);
     }
   }

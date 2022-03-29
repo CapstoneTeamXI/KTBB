@@ -1,8 +1,10 @@
 export enum EVENTS_NAME {
-  chestLoot = "chest-loot",
   attack = "attack",
   gameEnd = "game-end",
   enemyKilled = "enemy-killed",
+  keyChest = "key-chest",
+  coinChest = "coin-chest",
+  monsterChest = "monster-chest",
 }
 
 export enum GameStatus {

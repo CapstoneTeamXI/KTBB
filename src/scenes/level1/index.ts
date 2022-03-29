@@ -4,6 +4,7 @@ import { Enemy } from "../../classes/enemy";
 import { Chest } from "../../classes/chest";
 import { Map } from "../../classes/map";
 import { chestID, enemyID } from "../../consts";
+import { Actor } from "../../classes/actor";
 
 export class Level1 extends Scene {
   constructor() {
@@ -15,7 +16,8 @@ export class Level1 extends Scene {
   private tileset!: Tilemaps.Tileset;
   private wallsLayer!: Tilemaps.DynamicTilemapLayer;
   private groundLayer!: Tilemaps.DynamicTilemapLayer;
-  private enemy!: Enemy[];
+  private onMap = true;
+  private enableBossRoom = false;
 
   private initCamera(): void {
     this.cameras.main.setSize(this.game.scale.width, this.game.scale.height);
@@ -39,6 +41,11 @@ export class Level1 extends Scene {
     this.player = new Player(this, 800, 1550);
     this.initCamera();
 
+    const closedDoor = new Actor(this, 800, 384, "closedDoor");
+    closedDoor.setImmovable();
+    this.physics.add.collider(this.player, closedDoor);
+    this.physics.add.collider(closedDoor, this.wallsLayer);
+
     Chest.initChests(
       this,
       this.map,
@@ -60,41 +67,43 @@ export class Level1 extends Scene {
     );
 
     setInterval(() => {
-      if (this.player.level === 2) {
-        Enemy.initEnemy(
-          this,
-          this.map,
-          this.physics,
-          this.player,
-          this.wallsLayer,
-          enemyID.level2Orc,
-          "Respawn",
-          "RespawnPoint"
-        );
-      }
-      if (this.player.level === 3) {
-        Enemy.initEnemy(
-          this,
-          this.map,
-          this.physics,
-          this.player,
-          this.wallsLayer,
-          enemyID.level3Orc,
-          "Respawn",
-          "RespawnPoint"
-        );
-      }
-      if (this.player.level >= 4) {
-        Enemy.initEnemy(
-          this,
-          this.map,
-          this.physics,
-          this.player,
-          this.wallsLayer,
-          enemyID.level4Orc,
-          "Respawn",
-          "RespawnPoint"
-        );
+      if (this.onMap === true) {
+        if (this.player.level === 2) {
+          Enemy.initEnemy(
+            this,
+            this.map,
+            this.physics,
+            this.player,
+            this.wallsLayer,
+            enemyID.level2Orc,
+            "Respawn",
+            "RespawnPoint"
+          );
+        }
+        if (this.player.level === 3) {
+          Enemy.initEnemy(
+            this,
+            this.map,
+            this.physics,
+            this.player,
+            this.wallsLayer,
+            enemyID.level3Orc,
+            "Respawn",
+            "RespawnPoint"
+          );
+        }
+        if (this.player.level >= 4) {
+          Enemy.initEnemy(
+            this,
+            this.map,
+            this.physics,
+            this.player,
+            this.wallsLayer,
+            enemyID.level4Orc,
+            "Respawn",
+            "RespawnPoint"
+          );
+        }
       }
     }, 60000);
     this.physics.add.collider(this.player, this.wallsLayer);
@@ -108,6 +117,31 @@ export class Level1 extends Scene {
       loop: true,
       delay: 0,
     });
+
+    setInterval(() => {
+      if (this.onMap === true) {
+        if (this.player.level >= 2) {
+          this.enableBossRoom = true;
+        }
+        if (this.enableBossRoom === true) {
+          let openDoor = new Actor(this, 800, 384, "openDoor");
+          closedDoor.destroy();
+          this.physics.add.overlap(this.player, openDoor, () => {
+            this.onMap = false;
+            this.scene.start("level-1-boss-scene");
+            localStorage.setItem(
+              "playerLevel",
+              JSON.stringify(this.player.level)
+            );
+            localStorage.setItem("playerHP", JSON.stringify(this.player.hp));
+            localStorage.setItem(
+              "playerAttack",
+              JSON.stringify(this.player.attack)
+            );
+          });
+        }
+      }
+    }, 5000);
   }
 
   update(): void {
