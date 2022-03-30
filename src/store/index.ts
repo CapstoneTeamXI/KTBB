@@ -1,20 +1,20 @@
-import { applyMiddleware, createStore, Store } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import { createLogger } from 'redux-logger';
-import axios from 'axios';
-import { NavigateFunction } from 'react-router-dom';
+import { applyMiddleware, createStore, Store } from "redux";
+import thunkMiddleware from "redux-thunk";
+import { createLogger } from "redux-logger";
+import axios from "axios";
+import { NavigateFunction } from "react-router-dom";
 
 const initialState: PlayerState = {
-  player: { id: 0, name: '', score: 0, completedTime: '' },
+  player: { id: 0, name: "", score: 0, completedTime: "" },
   gameOver: false,
-  gameStats: { score: 0, completedTime: '' },
+  gameStats: { score: 0, completedTime: "" },
 };
 
 // ACTION TYPES
-export const ADD_PLAYER = 'ADD_PLAYER';
-export const GAME_OVER = 'GAME_OVER';
-export const GAME_RESTART = 'GAME_RESTART';
-export const GET_GAME_STATS = 'GET_GAME_STATS';
+export const ADD_PLAYER = "ADD_PLAYER";
+export const GAME_OVER = "GAME_OVER";
+export const GAME_RESTART = "GAME_RESTART";
+export const GET_GAME_STATS = "GET_GAME_STATS";
 
 export const _addPlayer = (player: IPlayer) => ({
   type: ADD_PLAYER,
@@ -37,11 +37,11 @@ export const getGameStats = (gameStats: IGameStats) => ({
 export const addPlayer = (player: IPlayer, navigate: NavigateFunction) => {
   return async (dispatch: DispatchType) => {
     try {
-      const { data: playerInfo } = await axios.post('/api/players', player);
+      const { data: playerInfo } = await axios.post("/api/players", player);
       dispatch(_addPlayer(playerInfo));
-      navigate('/');
+      navigate("/home");
     } catch (err) {
-      console.error('Adding player failed');
+      console.error("Adding player failed");
     }
   };
 };
