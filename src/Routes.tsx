@@ -21,7 +21,6 @@ export default function AppRouter() {
         <Routes>
           <Route path="/" element={<Game />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/game" element={<Game />} />
         </Routes>
       </div>
     </Router>

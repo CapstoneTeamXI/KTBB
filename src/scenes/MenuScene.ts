@@ -17,25 +17,25 @@ export class MenuScene extends Phaser.Scene {
   }
 
   create() {
-    const title = this.add.text(960, 200, "Kill The Big Bad", {
+    const title = this.add.text(960, 300, "Kill The Big Bad", {
       fontSize: 50,
       fontFamily: PressStart2P,
     });
     title.setOrigin(0.5, 0.5);
 
-    const playButton = this.add.text(960, 400, "<Play>", {
+    const playButton = this.add.text(960, 500, "<Play>", {
       fontSize: 38,
       fontFamily: PressStart2P,
     });
     playButton.setOrigin(0.5, 0.5);
 
-    const controlsButton = this.add.text(960, 500, "<How to Play>", {
+    const controlsButton = this.add.text(960, 600, "<How to Play>", {
       fontSize: 38,
       fontFamily: PressStart2P,
     });
     controlsButton.setOrigin(0.5, 0.5);
 
-    const leaderboardButton = this.add.text(960, 600, "<Leaderboard>", {
+    const leaderboardButton = this.add.text(960, 700, "<Leaderboard>", {
       fontSize: 38,
       fontFamily: PressStart2P,
     });
@@ -84,5 +84,7 @@ export class MenuScene extends Phaser.Scene {
       hoverSprite.x = leaderboardButton.x - leaderboardButton.width + 150;
       hoverSprite.y = leaderboardButton.y;
     });
+
+    leaderboardButton.on("pointerdown", () => {});
   }
 }
