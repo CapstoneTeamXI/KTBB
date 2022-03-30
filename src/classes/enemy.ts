@@ -6,7 +6,7 @@ import { gameObjectsToObjectPoints } from "../helpers/gameobject-to-object-point
 
 export class Enemy extends Actor {
   private target: Player;
-  private AGRESSOR_RADIUS = 150;
+  AGRESSOR_RADIUS = 125;
   private enemyXP: number;
   enemyHP: number;
 

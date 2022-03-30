@@ -10,6 +10,20 @@ export class Level1Boss extends Actor {
   private hpValue: Text;
   private alive = true;
   bossChase = false;
+  fireball!: Actor;
+  fireball2!: Actor;
+  fireball3!: Actor;
+  fireball4!: Actor;
+  fireball5!: Actor;
+  fireball6!: Actor;
+  fireballShot = false;
+  fireball2Shot = false;
+  fireball3Shot = false;
+  fireball4Shot = false;
+  fireball5Shot = false;
+  fireball6Shot = false;
+  enemySpawn = false;
+  enemySpawn2 = false;
 
   constructor(
     scene: Phaser.Scene,
