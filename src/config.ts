@@ -1,5 +1,12 @@
 import { Types } from "phaser";
-import { Preload, TitleScreen, Level1, LoadingScene, UIScene, Level1BossScene } from "./scenes";
+import {
+  Preload,
+  TitleScreen,
+  Level1,
+  LoadingScene,
+  UIScene,
+  Level1BossScene,
+} from "./scenes";
 
 type GameConfigExtended = Types.Core.GameConfig & { winScore: number };
 

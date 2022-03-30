@@ -1,4 +1,3 @@
-import { Scene, Tilemaps } from "phaser";
 import { Actor } from "./actor";
 import { Player } from "./player";
 import { EVENTS_NAME, GameStatus } from "../consts";
@@ -7,9 +6,10 @@ import { Text } from "./text";
 export class Level1Boss extends Actor {
   private target: Player;
   private AGRESSOR_RADIUS = 500;
-  private bossHP: number;
+  bossHP: number;
   private hpValue: Text;
   private alive = true;
+  bossChase = false;
 
   constructor(
     scene: Phaser.Scene,
@@ -23,7 +23,7 @@ export class Level1Boss extends Actor {
     this.target = target;
     scene.add.existing(this);
     scene.physics.add.existing(this);
-    this.bossHP = 700;
+    this.bossHP = 600;
     this.getBody().setSize(24, 28);
     this.getBody().setOffset(4, 5);
     this.initAnimations();
@@ -51,6 +51,22 @@ export class Level1Boss extends Actor {
     if (this.alive === true) {
       !this.anims.isPlaying && this.anims.play("Boss1idle", true);
       this.checkBossFlip();
+      if (this.bossChase === true) {
+        if (
+          Phaser.Math.Distance.BetweenPoints(
+            { x: this.x, y: this.y },
+            { x: this.target.x, y: this.target.y }
+          ) < this.AGRESSOR_RADIUS
+        ) {
+          this.getBody().setVelocityX(this.target.x - this.x);
+          this.checkBossFlip();
+          this.getBody().setVelocityY(this.target.y - this.y);
+          if (this.body.velocity.x !== 0 || this.body.velocity.y !== 0) {
+            !this.anims.isPlaying && this.anims.play("Boss1run", true);
+          }
+          this.hpValue.setPosition(this.x, this.y - this.height * 0.4);
+        }
+      }
     }
   }
 
@@ -117,6 +133,14 @@ export class Level1Boss extends Actor {
       key: "Boss1idle",
       frames: this.scene.anims.generateFrameNames("orcboss_atlas", {
         prefix: "idle-",
+        end: 3,
+      }),
+      frameRate: 8,
+    });
+    this.scene.anims.create({
+      key: "Boss1run",
+      frames: this.scene.anims.generateFrameNames("orcboss_atlas", {
+        prefix: "run-",
         end: 3,
       }),
       frameRate: 8,

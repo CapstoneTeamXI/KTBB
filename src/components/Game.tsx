@@ -19,7 +19,6 @@ export default function Game() {
   );
 
   const navigate = useNavigate();
-  console.log(isGameOver);
 
   const handleSubmit = (evt: React.SyntheticEvent) => {
     evt.preventDefault();
