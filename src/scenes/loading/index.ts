@@ -10,6 +10,8 @@ export class LoadingScene extends Scene {
     this.load.image("openDoor", "sprites/openDoor.png");
     this.load.image("closedDoor", "sprites/closedDoor.png");
     this.load.image("orcBoss", "sprites/orcBoss.png");
+    this.load.image("fireball", "sprites/fireball.png");
+    this.load.image("level4orc", "sprites/level4orc.png");
 
     this.load.atlas(
       "knight_atlas",
@@ -40,7 +42,6 @@ export class LoadingScene extends Scene {
     this.load.audio("hammerSwipe", ["audio/fx/hammerSwipe.wav"]);
     this.load.audio("coinChest", ["audio/fx/coinChest.wav"]);
     this.load.audio("keyChest", ["audio/fx/keyChest.wav"]);
-    // this.load.audio("killEnemy", ["audio/fx/hammerSwipe.wav"]);
   }
 
   create(): void {

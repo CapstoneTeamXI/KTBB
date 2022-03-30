@@ -71,26 +71,29 @@ export class UIScene extends Scene {
             },
           });
         }
-        this.game.events.off(EVENTS_NAME.keyChest, this.keyChestHandler);
-        this.game.events.off(EVENTS_NAME.coinChest, this.coinChestHandler);
-        this.game.events.off(
-          EVENTS_NAME.monsterChest,
-          this.monsterChestHandler
-        );
-        this.game.events.off(EVENTS_NAME.gameEnd, this.gameEndHandler);
+        if (status === GameStatus.LOSE) {
+          this.game.events.off(EVENTS_NAME.keyChest, this.keyChestHandler);
+          this.game.events.off(EVENTS_NAME.coinChest, this.coinChestHandler);
+          this.game.events.off(
+            EVENTS_NAME.monsterChest,
+            this.monsterChestHandler
+          );
+          this.game.events.off(EVENTS_NAME.gameEnd, this.gameEndHandler);
 
-        if (this.prevScene !== null) {
-          this.scene.get(this.currentScene.replaceAll('"', "")).scene.stop();
-          this.scene.get(this.prevScene.replaceAll('"', "")).scene.restart();
-          this.scene.start(this.prevScene.replaceAll('"', ""));
-        } else if (this.prevScene === null) {
-          this.scene.get(this.currentScene.replaceAll('"', "")).scene.restart();
+          if (this.prevScene !== null) {
+            this.scene.get(this.currentScene.replaceAll('"', "")).scene.stop();
+            this.scene.get(this.prevScene.replaceAll('"', "")).scene.restart();
+            this.scene.start(this.prevScene.replaceAll('"', ""));
+          } else if (this.prevScene === null) {
+            this.scene
+              .get(this.currentScene.replaceAll('"', ""))
+              .scene.restart();
+          }
         }
         this.sound.stopAll();
         this.scene.restart();
         localStorage.clear();
         this.alive = true;
-
         if (this.interval) {
           clearInterval(this.interval);
         }

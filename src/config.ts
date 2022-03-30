@@ -1,5 +1,12 @@
 import { Types } from "phaser";
-import { Preload, TitleScreen, Level1, LoadingScene, UIScene, Level1BossScene } from "./scenes";
+import {
+  Preload,
+  TitleScreen,
+  Level1,
+  LoadingScene,
+  UIScene,
+  Level1BossScene,
+} from "./scenes";
 
 type GameConfigExtended = Types.Core.GameConfig & { winScore: number };
 
@@ -17,7 +24,7 @@ const config: GameConfigExtended = {
   physics: {
     default: "arcade",
     arcade: {
-      debug: false,
+      debug: true,
     },
   },
   render: {
