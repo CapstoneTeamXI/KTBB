@@ -56,6 +56,7 @@ export class Level1BossScene extends Scene {
 
     this.bossInterval = setInterval(() => {
       if (this.boss.bossHP < 600) {
+        this.boss.bossChase = true;
         if (this.boss.fireballShot === false) {
           this.boss.fireballShot = true;
           this.boss.fireball = new Actor(this, 800, 1380, "fireball");
@@ -131,7 +132,6 @@ export class Level1BossScene extends Scene {
         }
       }
       if (this.boss.bossHP <= 400) {
-        this.boss.bossChase = true;
         if (this.boss.fireball3Shot === false) {
           this.boss.fireball3Shot = true;
           this.boss.fireball3 = new Actor(this, 800, 1380, "fireball");
