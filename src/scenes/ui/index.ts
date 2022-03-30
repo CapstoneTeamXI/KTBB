@@ -70,6 +70,7 @@ export class UIScene extends Scene {
               completedTime: this.timer.getValue(),
             },
           });
+          this.game.destroy(true, false);
         }
         if (status === GameStatus.LOSE) {
           this.game.events.off(EVENTS_NAME.keyChest, this.keyChestHandler);
