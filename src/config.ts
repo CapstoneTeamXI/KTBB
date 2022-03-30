@@ -6,6 +6,7 @@ import {
   LoadingScene,
   UIScene,
   Level1BossScene,
+  MenuScene,
 } from "./scenes";
 
 type GameConfigExtended = Types.Core.GameConfig & { winScore: number };
@@ -41,7 +42,15 @@ const config: GameConfigExtended = {
   audio: {
     disableWebAudio: false,
   },
-  scene: [Preload, TitleScreen, LoadingScene, Level1, Level1BossScene, UIScene],
+  scene: [
+    Preload,
+    MenuScene,
+    TitleScreen,
+    LoadingScene,
+    Level1,
+    Level1BossScene,
+    UIScene,
+  ],
   winScore: 40,
 };
 

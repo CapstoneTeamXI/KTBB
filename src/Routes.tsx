@@ -1,7 +1,7 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Game from './components/Game';
-import Home from './components/Home';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import Game from "./components/Game";
+import Home from "./components/Home";
 
 export default function AppRouter() {
   return (
@@ -19,9 +19,8 @@ export default function AppRouter() {
         </nav> */}
 
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Game />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/game" element={<Game />} />
         </Routes>
       </div>
     </Router>
