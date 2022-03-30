@@ -32,11 +32,11 @@ const config: GameConfigExtended = {
     antialiasGL: false,
     pixelArt: true,
   },
-  callbacks: {
-    postBoot: () => {
-      window.sizeChanged();
-    },
-  },
+  // callbacks: {
+  //   postBoot: () => {
+  //     window.sizeChanged();
+  //   },
+  // },
   canvasStyle: `display: block; width: 100%; height: 100%;`,
   autoFocus: true,
   audio: {

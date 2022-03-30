@@ -123,7 +123,7 @@ export class Level1 extends Scene {
       delay: 0,
     });
 
-    setInterval(() => {
+    const doorInterval = setInterval(() => {
       if (this.bossKeyValue === 4) {
         this.closedDoorActor.destroy();
         this.openDoorActor = new Actor(this, 800, 384, "openDoor");
@@ -142,6 +142,9 @@ export class Level1 extends Scene {
           this.scene.get(this.scene.key).scene.stop();
           if (this.spawnTimer) {
             clearInterval(this.spawnTimer);
+          }
+          if (doorInterval) {
+            clearInterval(doorInterval);
           }
         });
       }
