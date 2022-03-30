@@ -223,9 +223,13 @@ export class Level1BossScene extends Scene {
     this.player.update();
     this.boss.update();
     if (this.player.hp <= 0) {
-      this.fireballShot = true;
-      this.fireball2Shot = true;
-      this.fireball3Shot = true;
+      this.fireballShot = false;
+      this.fireball2Shot = false;
+      this.fireball3Shot = false;
+      this.fireball4Shot = false;
+      this.fireball5Shot = false;
+      this.enemySpawn = false;
+      this.enemySpawn2 = false;
     }
   }
 }
