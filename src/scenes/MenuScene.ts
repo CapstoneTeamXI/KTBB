@@ -15,6 +15,8 @@ export class MenuScene extends Phaser.Scene {
       'spritesheets/pointer.png',
       'spritesheets/pointer_atlas.json'
     );
+
+    this.load.image("controls", "sprites/controls.png");
   }
 
   create() {
@@ -76,7 +78,14 @@ export class MenuScene extends Phaser.Scene {
       hoverSprite.y = controlsButton.y;
     });
 
-    controlsButton.on('pointerdown', () => {});
+    controlsButton.on("pointerdown", () => {
+      const controls = this.add.sprite(960, 500, "controls");
+      controls.setScale(0.3);
+      this.input.keyboard.on("keydown-SPACE", () => {
+        controls.destroy();
+      });
+    });
+
 
     leaderboardButton.setInteractive();
     leaderboardButton.on('pointerover', () => {
