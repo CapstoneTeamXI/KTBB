@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   const [players, setPlayers] = useState<Array<IPlayer>>([]);
@@ -9,7 +9,7 @@ export default function Home() {
   }, []);
 
   const getPlayers = () => {
-    fetch("/api/players")
+    fetch('/api/players')
       .then((res) => res.json())
       .then((scores) => setPlayers(scores));
   };
@@ -39,7 +39,7 @@ export default function Home() {
           </table>
           <br></br>
           <Link to="/">
-            <button className="more">New Game</button>
+            <button className="more">Menu</button>
           </Link>
         </div>
       ) : (
@@ -48,7 +48,7 @@ export default function Home() {
           <h1>No scores yet!</h1>
           <br></br>
           <Link to="/">
-            <button className="more">New Game</button>
+            <button className="more">Menu</button>
           </Link>
         </div>
       )}

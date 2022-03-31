@@ -1,3 +1,7 @@
 body {
-  background: #f7f7f7;
+  background: #351f1b;
+  color: white;
+  /* font-family: PressStart2P; */
+  font-family: 'Press Start 2P', cursive;
+  font-family: 'Roboto Mono', monospace;
 }
