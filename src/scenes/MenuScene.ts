@@ -87,8 +87,6 @@ export class MenuScene extends Phaser.Scene {
     });
 
     leaderboardButton.on('pointerdown', () => {
-      console.log('redirecting to leaderboard');
-      console.log(`window pathname: ${window.location.pathname}`);
       window.location.href = window.location.pathname + 'home';
     });
   }
