@@ -9,19 +9,9 @@ async function seed() {
 
   const players = await Promise.all([
     Player.create({
-      name: 'alice',
-      score: 200,
-      completedTime: '4 min 25 sec',
-    }),
-    Player.create({
-      name: 'bob',
-      score: 185,
-      completedTime: '3 min 15 sec',
-    }),
-    Player.create({
-      name: 'charlie',
-      score: 225,
-      completedTime: '5 min 30 sec',
+      name: 'Jeffy',
+      score: 2500,
+      completedTime: '1 min 25 sec',
     }),
   ]);
 
