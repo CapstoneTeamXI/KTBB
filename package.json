@@ -44,6 +44,7 @@
     "webfontloader": "^1.6.28"
   },
   "scripts": {
+    "heroku-postbuild": "npm install && npm run build",
     "start": "serve -s build",
     "start:dev": "run-p --race start:server start:app",
     "start:app": "react-scripts start",
