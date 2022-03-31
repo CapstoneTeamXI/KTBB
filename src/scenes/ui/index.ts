@@ -125,9 +125,9 @@ export class UIScene extends Scene {
   }
 
   create(): void {
-    this.bossKey = new BossKeyContainer(this, 20, 100, 0);
+    this.bossKey = new BossKeyContainer(this, 20, 50, 0);
     this.score = new Score(this, 20, 20, 0);
-    this.timer = new Timer(this, this.game.scale.width * 0.4, 20);
+    this.timer = new Timer(this, this.game.scale.width * 0.45, 20);
     this.initListeners();
   }
 }
