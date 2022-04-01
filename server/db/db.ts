@@ -5,7 +5,7 @@ const databaseName =
   pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '');
 
 interface Config {
-  logging: boolean;
+  logging?: boolean;
   dialectOptions: any;
 }
 
