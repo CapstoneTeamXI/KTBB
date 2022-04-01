@@ -7,6 +7,7 @@ const {
 
 router.get('/', async (req, res, next) => {
   try {
+    console.log('Hello??');
     const players = await Player.findAll({
       attributes: ['id', 'name', 'score', 'completedTime'],
       order: [['score', 'DESC']],
