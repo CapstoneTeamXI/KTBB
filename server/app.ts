@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import path from 'path';
 import morgan from 'morgan';
 // const express = require('express');
@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 app.use((req: Request, res: Response, next) => {
   if (path.extname(req.path).length) {
     const err = new Error('Not found');
-    res.status = 404;
+    res.status(404);
     next(err);
   } else {
     next();

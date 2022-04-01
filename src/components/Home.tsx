@@ -39,7 +39,7 @@ export default function Home() {
           </table>
           <br></br>
           <Link to="/">
-            <button className="more">Menu</button>
+            <button className="more">&lt;Menu&gt;</button>
           </Link>
         </div>
       ) : (
