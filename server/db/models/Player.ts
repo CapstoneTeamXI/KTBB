@@ -1,6 +1,4 @@
 import Sequelize from 'sequelize';
-// const Sequelize = require('sequelize');
-// const db = require('../db');
 import { db } from '../db';
 
 const Player = db.define('user', {
