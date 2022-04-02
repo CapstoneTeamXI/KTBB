@@ -11,7 +11,22 @@ async function seed() {
     Player.create({
       name: 'Jeffy',
       score: 2500,
-      completedTime: '1 min 25 sec',
+      completedTime: 85,
+    }),
+    Player.create({
+      name: 'Vinh',
+      score: 2500,
+      completedTime: 4000,
+    }),
+    Player.create({
+      name: 'Jake',
+      score: 2500,
+      completedTime: 3000,
+    }),
+    Player.create({
+      name: 'Taz',
+      score: 2600,
+      completedTime: 59,
     }),
   ]);
 

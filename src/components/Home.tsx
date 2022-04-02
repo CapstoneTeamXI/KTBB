@@ -13,7 +13,16 @@ export default function Home() {
       .then((res) => res.json())
       .then((scores) => setPlayers(scores));
   };
-  // console.log(highScores);
+
+  const timeToString = (time: number) => {
+    const hour = Math.floor(time / 3600);
+    const min = Math.floor((time - hour * 3600) / 60);
+    const sec = time - hour * 3600 - min * 60;
+
+    if (hour > 0) return `${hour} hr ${min} min ${sec} sec`;
+    if (min > 0) return `${min} min ${sec} sec`;
+    return `${sec} sec`;
+  };
   return (
     <div className="App">
       {players.length ? (
@@ -31,7 +40,7 @@ export default function Home() {
                   <td key={index + player.name}>{player.name}</td>
                   <td key={index + player.score}>{player.score}</td>
                   <td key={index + player.completedTime}>
-                    {player.completedTime}
+                    {timeToString(player.completedTime)}
                   </td>
                 </tr>
               ))}

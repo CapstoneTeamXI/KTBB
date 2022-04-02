@@ -11,7 +11,7 @@ const Player = db.define('user', {
     allowNull: false,
   },
   completedTime: {
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER,
     allowNull: false,
   },
 });

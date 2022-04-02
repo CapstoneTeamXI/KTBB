@@ -5,9 +5,9 @@ import axios from 'axios';
 import { NavigateFunction } from 'react-router-dom';
 
 const initialState: PlayerState = {
-  player: { id: 0, name: '', score: 0, completedTime: '' },
+  player: { id: 0, name: '', score: 0, completedTime: 0 },
   gameOver: false,
-  gameStats: { score: 0, completedTime: '' },
+  gameStats: { score: 0, completedTime: 0 },
 };
 
 // ACTION TYPES
