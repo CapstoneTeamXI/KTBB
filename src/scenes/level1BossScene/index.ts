@@ -1,13 +1,13 @@
-import { Scene, Tilemaps } from "phaser";
-import { Player } from "../../classes/player";
-import { Map } from "../../classes/map";
-import { Level1Boss } from "../../classes/level1Boss";
-import { Actor } from "../../classes/actor";
-import { Enemy } from "../../classes/enemy";
+import { Scene, Tilemaps } from 'phaser';
+import { Player } from '../../classes/player';
+import { Map } from '../../classes/map';
+import { Level1Boss } from '../../classes/level1Boss';
+import { Actor } from '../../classes/actor';
+import { Enemy } from '../../classes/enemy';
 
 export class Level1BossScene extends Scene {
   constructor() {
-    super("level-1-boss-scene");
+    super('level-1-boss-scene');
   }
 
   private player!: Player;
@@ -25,7 +25,7 @@ export class Level1BossScene extends Scene {
   }
 
   create(): void {
-    localStorage.setItem("currentScene", JSON.stringify(this.scene.key));
+    localStorage.setItem('currentScene', JSON.stringify(this.scene.key));
     const updatedMap = Map.initMap(
       this,
       this.map,
@@ -33,22 +33,23 @@ export class Level1BossScene extends Scene {
       this.groundLayer,
       this.wallsLayer,
       this.physics,
-      "dungeonBoss"
+      'dungeonBoss'
     );
 
     this.wallsLayer = updatedMap.wallsLayer;
 
     this.player = new Player(this, 800, 1550);
-    this.player.level = parseInt(localStorage.getItem("playerLevel")!);
-    this.player.hp = parseInt(localStorage.getItem("playerHP")!);
-    this.player.attack = parseInt(localStorage.getItem("playerAttack")!);
+    this.player.level = parseInt(localStorage.getItem('playerLevel')!);
+    this.player.maxHP = parseInt(localStorage.getItem('playerMaxHP')!);
+    this.player.hp = parseInt(localStorage.getItem('playerHP')!);
+    this.player.attack = parseInt(localStorage.getItem('playerAttack')!);
     this.initCamera();
     // this.player.attack = 50;
     // this.player.hp = 10;
 
     this.physics.add.collider(this.player, this.wallsLayer);
 
-    this.boss = new Level1Boss(this, 800, 1380, "orcBoss", this.player);
+    this.boss = new Level1Boss(this, 800, 1380, 'orcBoss', this.player);
     this.physics.add.collider(this.boss, this.wallsLayer);
     this.physics.add.overlap(this.player, this.boss, (obj1, _) => {
       (obj1 as Player).getDamage(10);
@@ -59,7 +60,7 @@ export class Level1BossScene extends Scene {
         this.boss.bossChase = true;
         if (this.boss.fireballShot === false) {
           this.boss.fireballShot = true;
-          this.boss.fireball = new Actor(this, 800, 1380, "fireball");
+          this.boss.fireball = new Actor(this, 800, 1380, 'fireball');
           this.physics.add.collider(this.boss.fireball, this.wallsLayer);
           this.physics.add.overlap(
             this.player,
@@ -78,7 +79,7 @@ export class Level1BossScene extends Scene {
       if (this.boss.bossHP <= 500) {
         if (this.boss.fireball2Shot === false) {
           this.boss.fireball2Shot = true;
-          this.boss.fireball2 = new Actor(this, 800, 1380, "fireball");
+          this.boss.fireball2 = new Actor(this, 800, 1380, 'fireball');
           this.physics.add.collider(this.boss.fireball2, this.wallsLayer);
           this.physics.add.overlap(
             this.player,
@@ -94,10 +95,10 @@ export class Level1BossScene extends Scene {
           this.boss.fireball2.body.bounce.set(1);
         }
         if (this.boss.enemySpawn === false) {
-          const enemy1 = new Enemy(this, 720, 1450, "level4orc", this.player);
-          const enemy2 = new Enemy(this, 880, 1450, "level4orc", this.player);
-          const enemy3 = new Enemy(this, 720, 1300, "level4orc", this.player);
-          const enemy4 = new Enemy(this, 880, 1300, "level4orc", this.player);
+          const enemy1 = new Enemy(this, 720, 1450, 'level4orc', this.player);
+          const enemy2 = new Enemy(this, 880, 1450, 'level4orc', this.player);
+          const enemy3 = new Enemy(this, 720, 1300, 'level4orc', this.player);
+          const enemy4 = new Enemy(this, 880, 1300, 'level4orc', this.player);
           this.physics.add.overlap(this.player, enemy1, (obj1, _) => {
             (obj1 as Player).getDamage(5);
           });
@@ -134,7 +135,7 @@ export class Level1BossScene extends Scene {
       if (this.boss.bossHP <= 400) {
         if (this.boss.fireball3Shot === false) {
           this.boss.fireball3Shot = true;
-          this.boss.fireball3 = new Actor(this, 800, 1380, "fireball");
+          this.boss.fireball3 = new Actor(this, 800, 1380, 'fireball');
           this.physics.add.collider(this.boss.fireball3, this.wallsLayer);
           this.physics.add.overlap(
             this.player,
@@ -153,7 +154,7 @@ export class Level1BossScene extends Scene {
       if (this.boss.bossHP <= 300) {
         if (this.boss.fireball4Shot === false) {
           this.boss.fireball4Shot = true;
-          this.boss.fireball4 = new Actor(this, 800, 1380, "fireball");
+          this.boss.fireball4 = new Actor(this, 800, 1380, 'fireball');
           this.physics.add.collider(this.boss.fireball4, this.wallsLayer);
           this.physics.add.overlap(
             this.player,
@@ -172,7 +173,7 @@ export class Level1BossScene extends Scene {
       if (this.boss.bossHP <= 200) {
         if (this.boss.fireball5Shot === false) {
           this.boss.fireball5Shot = true;
-          this.boss.fireball5 = new Actor(this, 800, 1380, "fireball");
+          this.boss.fireball5 = new Actor(this, 800, 1380, 'fireball');
           this.physics.add.collider(this.boss.fireball5, this.wallsLayer);
           this.physics.add.overlap(
             this.player,
@@ -188,10 +189,10 @@ export class Level1BossScene extends Scene {
           this.boss.fireball5.body.bounce.set(1);
         }
         if (this.boss.enemySpawn2 === false) {
-          const enemy1 = new Enemy(this, 720, 1450, "level4orc", this.player);
-          const enemy2 = new Enemy(this, 880, 1450, "level4orc", this.player);
-          const enemy3 = new Enemy(this, 720, 1300, "level4orc", this.player);
-          const enemy4 = new Enemy(this, 880, 1300, "level4orc", this.player);
+          const enemy1 = new Enemy(this, 720, 1450, 'level4orc', this.player);
+          const enemy2 = new Enemy(this, 880, 1450, 'level4orc', this.player);
+          const enemy3 = new Enemy(this, 720, 1300, 'level4orc', this.player);
+          const enemy4 = new Enemy(this, 880, 1300, 'level4orc', this.player);
           this.physics.add.overlap(this.player, enemy1, (obj1, _) => {
             (obj1 as Player).getDamage(10);
           });
@@ -228,7 +229,7 @@ export class Level1BossScene extends Scene {
       if (this.boss.bossHP <= 100) {
         if (this.boss.fireball6Shot === false) {
           this.boss.fireball6Shot = true;
-          this.boss.fireball6 = new Actor(this, 800, 1380, "fireball");
+          this.boss.fireball6 = new Actor(this, 800, 1380, 'fireball');
           this.physics.add.collider(this.boss.fireball6, this.wallsLayer);
           this.physics.add.overlap(
             this.player,

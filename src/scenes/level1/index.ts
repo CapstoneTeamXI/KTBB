@@ -1,14 +1,14 @@
-import { Scene, Tilemaps } from "phaser";
-import { Player } from "../../classes/player";
-import { Enemy } from "../../classes/enemy";
-import { Chest } from "../../classes/chest";
-import { Map } from "../../classes/map";
-import { chestID, enemyID } from "../../consts";
-import { Actor } from "../../classes/actor";
+import { Scene, Tilemaps } from 'phaser';
+import { Player } from '../../classes/player';
+import { Enemy } from '../../classes/enemy';
+import { Chest } from '../../classes/chest';
+import { Map } from '../../classes/map';
+import { chestID, enemyID } from '../../consts';
+import { Actor } from '../../classes/actor';
 
 export class Level1 extends Scene {
   constructor() {
-    super("level-1-scene");
+    super('level-1-scene');
   }
 
   private player!: Player;
@@ -30,7 +30,7 @@ export class Level1 extends Scene {
 
   create(): void {
     this.onMap = true;
-    localStorage.setItem("currentScene", JSON.stringify(this.scene.key));
+    localStorage.setItem('currentScene', JSON.stringify(this.scene.key));
     const updatedMap = Map.initMap(
       this,
       this.map,
@@ -38,14 +38,14 @@ export class Level1 extends Scene {
       this.groundLayer,
       this.wallsLayer,
       this.physics,
-      "dungeon"
+      'dungeon'
     );
 
     this.map = updatedMap.map;
     this.wallsLayer = updatedMap.wallsLayer;
     this.player = new Player(this, 800, 1550);
     this.initCamera();
-    this.closedDoorActor = new Actor(this, 800, 384, "closedDoor");
+    this.closedDoorActor = new Actor(this, 800, 384, 'closedDoor');
     this.closedDoorActor.setImmovable();
 
     this.physics.add.collider(this.player, this.closedDoorActor);
@@ -57,7 +57,7 @@ export class Level1 extends Scene {
       this.physics,
       this.player,
       chestID.normalChest,
-      "ChestPoint"
+      'ChestPoint'
     );
 
     Enemy.initEnemy(
@@ -67,8 +67,8 @@ export class Level1 extends Scene {
       this.player,
       this.wallsLayer,
       enemyID.level1Orc,
-      "Enemies",
-      "EnemyPoint"
+      'Enemies',
+      'EnemyPoint'
     );
 
     this.spawnTimer = setInterval(() => {
@@ -81,8 +81,8 @@ export class Level1 extends Scene {
             this.player,
             this.wallsLayer,
             enemyID.level2Orc,
-            "Respawn",
-            "RespawnPoint"
+            'Respawn',
+            'RespawnPoint'
           );
         }
         if (this.player.level === 3) {
@@ -93,8 +93,8 @@ export class Level1 extends Scene {
             this.player,
             this.wallsLayer,
             enemyID.level3Orc,
-            "Respawn",
-            "RespawnPoint"
+            'Respawn',
+            'RespawnPoint'
           );
         }
         if (this.player.level >= 4) {
@@ -105,15 +105,15 @@ export class Level1 extends Scene {
             this.player,
             this.wallsLayer,
             enemyID.level4Orc,
-            "Respawn",
-            "RespawnPoint"
+            'Respawn',
+            'RespawnPoint'
           );
         }
       }
     }, 60000);
     this.physics.add.collider(this.player, this.wallsLayer);
 
-    this.sound.play("monsterVania", {
+    this.sound.play('monsterVania', {
       mute: false,
       volume: 0.1,
       rate: 1,
@@ -126,19 +126,23 @@ export class Level1 extends Scene {
     const doorInterval = setInterval(() => {
       if (this.bossKeyValue === 4) {
         this.closedDoorActor.destroy();
-        this.openDoorActor = new Actor(this, 800, 384, "openDoor");
+        this.openDoorActor = new Actor(this, 800, 384, 'openDoor');
         this.physics.add.overlap(this.player, this.openDoorActor, () => {
-          this.scene.start("level-1-boss-scene");
+          this.scene.start('level-1-boss-scene');
           localStorage.setItem(
-            "playerLevel",
+            'playerLevel',
             JSON.stringify(this.player.level)
           );
-          localStorage.setItem("playerHP", JSON.stringify(this.player.hp));
           localStorage.setItem(
-            "playerAttack",
+            'playerMaxHP',
+            JSON.stringify(this.player.maxHP)
+          );
+          localStorage.setItem('playerHP', JSON.stringify(this.player.hp));
+          localStorage.setItem(
+            'playerAttack',
             JSON.stringify(this.player.attack)
           );
-          localStorage.setItem("prevScene", JSON.stringify(this.scene.key));
+          localStorage.setItem('prevScene', JSON.stringify(this.scene.key));
           this.scene.get(this.scene.key).scene.stop();
           if (this.spawnTimer) {
             clearInterval(this.spawnTimer);
@@ -158,6 +162,6 @@ export class Level1 extends Scene {
         clearInterval(this.spawnTimer);
       }
     }
-    this.bossKeyValue = parseInt(localStorage.getItem("bossKeyValue")!);
+    this.bossKeyValue = parseInt(localStorage.getItem('bossKeyValue')!);
   }
 }

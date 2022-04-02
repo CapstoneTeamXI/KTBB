@@ -1,6 +1,7 @@
-import { Physics } from "phaser";
+import { Physics } from 'phaser';
 
 export class Actor extends Physics.Arcade.Sprite {
+  maxHP = 10;
   hp = 10;
   level = 1;
   requiredXP = 5;
