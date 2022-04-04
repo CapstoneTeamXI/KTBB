@@ -15,8 +15,8 @@ const config: GameConfigExtended = {
   title: 'Kill the Big Bad',
   type: Phaser.WEBGL,
   backgroundColor: '#351f1b',
-  width: 1920,
-  height: 1080,
+  // width: 1920,
+  // height: 1080,
   scale: {
     mode: Phaser.Scale.ScaleModes.NONE,
     width: window.innerWidth,
