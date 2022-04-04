@@ -18,7 +18,7 @@ const config: GameConfigExtended = {
   width: 1920,
   height: 1080,
   scale: {
-    mode: Phaser.Scale.ScaleModes.NONE,
+    mode: Phaser.Scale.FIT,
     width: window.innerWidth,
     height: window.innerHeight,
   },
