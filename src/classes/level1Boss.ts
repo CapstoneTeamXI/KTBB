@@ -1,13 +1,17 @@
-import { Actor } from "./actor";
-import { Player } from "./player";
-import { EVENTS_NAME, GameStatus } from "../consts";
-import { Text } from "./text";
+import { Actor } from './actor';
+import { Player } from './player';
+import { EVENTS_NAME, GameStatus } from '../consts';
+import { Text } from './text';
+import { HealthBar } from './healthbar';
 
 export class Level1Boss extends Actor {
   private target: Player;
   private AGRESSOR_RADIUS = 500;
   bossHP: number;
-  private hpValue: Text;
+  bossMaxHPValue: number;
+  private bossCurrentHP: Text;
+  private bossMaxHP: Text;
+  private hpValue: HealthBar;
   private alive = true;
   bossChase = false;
   fireball!: Actor;
@@ -38,22 +42,34 @@ export class Level1Boss extends Actor {
     scene.add.existing(this);
     scene.physics.add.existing(this);
     this.bossHP = 600;
+    this.bossMaxHPValue = 600;
     this.getBody().setSize(24, 28);
     this.getBody().setOffset(4, 5);
     this.initAnimations();
     this.attackHandler();
 
-    this.hpValue = new Text(
+    this.hpValue = new HealthBar(this.scene, this.x - 40, this.y - this.height);
+
+    this.bossCurrentHP = new Text(
       this.scene,
-      this.x,
-      this.y - this.height,
+      this.x - 3,
+      this.y - this.height + 7.5,
       this.bossHP.toString()
     )
-      .setFontSize(12)
+      .setFontSize(10)
+      .setOrigin(0.8, 0.5);
+
+    this.bossMaxHP = new Text(
+      this.scene,
+      this.x + 21,
+      this.y - this.height + 7.5,
+      '/' + this.bossMaxHPValue.toString()
+    )
+      .setFontSize(10)
       .setOrigin(0.8, 0.5);
 
     this.scene.game.events.on(EVENTS_NAME.attack, this.attackHandler, this);
-    this.on("destroy", () => {
+    this.on('destroy', () => {
       this.scene.game.events.removeListener(
         EVENTS_NAME.attack,
         this.attackHandler
@@ -63,7 +79,7 @@ export class Level1Boss extends Actor {
 
   update(): void {
     if (this.alive === true) {
-      !this.anims.isPlaying && this.anims.play("Boss1idle", true);
+      !this.anims.isPlaying && this.anims.play('Boss1idle', true);
       this.checkBossFlip();
       if (this.bossChase === true) {
         if (
@@ -76,9 +92,18 @@ export class Level1Boss extends Actor {
           this.checkBossFlip();
           this.getBody().setVelocityY(this.target.y - this.y);
           if (this.body.velocity.x !== 0 || this.body.velocity.y !== 0) {
-            !this.anims.isPlaying && this.anims.play("Boss1run", true);
+            !this.anims.isPlaying && this.anims.play('Boss1run', true);
           }
-          this.hpValue.setPosition(this.x, this.y - this.height * 0.4);
+          this.hpValue.getHP(this.bossMaxHPValue, this.bossHP);
+          if (this.x || this.y) {
+            this.hpValue.x = this.x - 38;
+            this.hpValue.y = this.y - this.height;
+          }
+          this.bossCurrentHP.setPosition(
+            this.x - 3,
+            this.y - this.height + 7.5
+          );
+          this.bossMaxHP.setPosition(this.x + 21, this.y - this.height + 7.5);
         }
       }
     }
@@ -95,14 +120,15 @@ export class Level1Boss extends Actor {
       this.getEnemyDamage(
         this.getDamageValue(this.target.attack / 2, this.target.attack)
       );
-      this.hpValue.setText(this.bossHP.toString());
+      this.bossCurrentHP.setText(this.bossHP.toString());
       if (this.bossHP <= 0) {
         this.alive = false;
         this.disableBody(true, false);
         this.scene.time.delayedCall(0, () => {
           this.scene.game.events.emit(EVENTS_NAME.gameEnd, GameStatus.WIN);
           this.destroy();
-          this.hpValue.destroy();
+          this.bossCurrentHP.destroy();
+          this.bossMaxHP.destroy();
         });
       }
     }
@@ -144,17 +170,17 @@ export class Level1Boss extends Actor {
 
   private initAnimations(): void {
     this.scene.anims.create({
-      key: "Boss1idle",
-      frames: this.scene.anims.generateFrameNames("orcboss_atlas", {
-        prefix: "idle-",
+      key: 'Boss1idle',
+      frames: this.scene.anims.generateFrameNames('orcboss_atlas', {
+        prefix: 'idle-',
         end: 3,
       }),
       frameRate: 8,
     });
     this.scene.anims.create({
-      key: "Boss1run",
-      frames: this.scene.anims.generateFrameNames("orcboss_atlas", {
-        prefix: "run-",
+      key: 'Boss1run',
+      frames: this.scene.anims.generateFrameNames('orcboss_atlas', {
+        prefix: 'run-',
         end: 3,
       }),
       frameRate: 8,
