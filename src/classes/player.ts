@@ -38,6 +38,8 @@ export class Player extends Actor {
       this.scene.game.events.emit(EVENTS_NAME.attack);
     });
 
+    this.hpValue = new HealthBar(this.scene, this.x + 38, this.y - this.height);
+
     this.playerLevel = new Text(
       this.scene,
       this.x + 9,
@@ -46,7 +48,7 @@ export class Player extends Actor {
     )
       .setFontSize(12)
       .setOrigin(0.8, 0.5);
-    this.playerLevel.setDepth(2);
+
     this.currentPlayerHP = new Text(
       this.scene,
       this.x,
@@ -55,7 +57,6 @@ export class Player extends Actor {
     )
       .setFontSize(10)
       .setOrigin(0.8, 0.5);
-    this.currentPlayerHP.setDepth(2);
 
     this.maxPlayerHP = new Text(
       this.scene,
@@ -65,8 +66,7 @@ export class Player extends Actor {
     )
       .setFontSize(10)
       .setOrigin(0.8, 0.5);
-    this.maxPlayerHP.setDepth(2);
-    this.hpValue = new HealthBar(this.scene, this.x + 38, this.y - this.height);
+
     this.getBody().setSize(15, 20);
     this.getBody().setOffset(16, 15);
     this.on('destroy', () => {
@@ -179,7 +179,6 @@ export class Player extends Actor {
 
   public getDamage(value?: number): void {
     super.getDamage(value);
-    // this.hpValue.setText(this.hp.toString());
     if (this.hp <= 0) {
       this.scene.game.events.emit(EVENTS_NAME.gameEnd, GameStatus.LOSE);
     }

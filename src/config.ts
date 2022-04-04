@@ -1,4 +1,4 @@
-import { Types } from "phaser";
+import { Types } from 'phaser';
 import {
   Preload,
   TitleScreen,
@@ -7,23 +7,23 @@ import {
   UIScene,
   Level1BossScene,
   MenuScene,
-} from "./scenes";
+} from './scenes';
 
 type GameConfigExtended = Types.Core.GameConfig & { winScore: number };
 
 const config: GameConfigExtended = {
-  title: "Kill the Big Bad Dev",
+  title: 'Kill the Big Bad',
   type: Phaser.WEBGL,
-  backgroundColor: "#351f1b",
-  // width: 1920,
-  // height: 1080,
+  backgroundColor: '#351f1b',
+  width: 1920,
+  height: 1080,
   scale: {
     mode: Phaser.Scale.ScaleModes.NONE,
     width: window.innerWidth,
     height: window.innerHeight,
   },
   physics: {
-    default: "arcade",
+    default: 'arcade',
     arcade: {
       debug: false,
     },
