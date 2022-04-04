@@ -15,3 +15,8 @@ table {
   text-align: center;
   align-items: center;
 }
+
+td,
+th {
+  border-right: wheat solid 3px;
+}

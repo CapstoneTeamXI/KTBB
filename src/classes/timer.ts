@@ -43,13 +43,14 @@ export class Timer extends Text {
     this.setText(`${this.timer}`);
   }
 
-  public getValue(): string {
-    if (this.hour > 0) {
-      return `${this.hour} hr ${this.minute} min ${this.second} sec`;
-    }
-    if (this.minute > 0) {
-      return `${this.minute} min ${this.second} sec`;
-    }
-    return `${this.second} sec`;
+  public getValue(): number {
+    // if (this.hour > 0) {
+    //   return `${this.hour} hr ${this.minute} min ${this.second} sec`;
+    // }
+    // if (this.minute > 0) {
+    //   return `${this.minute} min ${this.second} sec`;
+    // }
+    // return `${this.second} sec`;
+    return this.hour * 60 * 60 + this.minute * 60 + this.second;
   }
 }

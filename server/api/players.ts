@@ -9,7 +9,10 @@ router.get('/', async (req, res, next) => {
   try {
     const players = await Player.findAll({
       attributes: ['id', 'name', 'score', 'completedTime'],
-      order: [['score', 'DESC']],
+      order: [
+        ['score', 'DESC'],
+        ['completedTime', 'ASC'],
+      ],
     });
     res.json(players);
   } catch (err) {

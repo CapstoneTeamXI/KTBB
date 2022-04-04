@@ -27,12 +27,12 @@ interface IPlayer {
   id?: number;
   name: string;
   score: number;
-  completedTime: string;
+  completedTime: number;
 }
 
 interface IGameStats {
   score: number;
-  completedTime: string;
+  completedTime: number;
 }
 
 type DispatchType = (args: PlayerAction) => PlayerAction;
